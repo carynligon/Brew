@@ -1,35 +1,37 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { AppRegistry, StyleSheet, NavigatorIOS } from 'react-native';
+import { Login } from './src/app/Pages/Login';
 
-export default class Brew extends Component {
+const firstRoute = {
+  name: 'Login',
+  component: Login
+};
+
+const Main = React.createClass({
+  getInitialState() {
+    return {navigationBarHidden: false}
+  },
+
+  toggleNavBar() {
+    this.setState({navigationBarHidden: !this.state.navigationBarHidden});
+  },
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
+      <NavigatorIOS
+        initialRoute={{
+          component: Login,
+          title: 'Login',
+          passProps: {
+            toggleNavBar: this.toggleNavBar
+          }
+        }}
+        navigationBarHidden={true}
+        style={{flex: 1}}
+      />
+    )
   }
-}
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginTop: 100
   },
   welcome: {
     fontSize: 20,
@@ -50,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Brew', () => Brew);
+AppRegistry.registerComponent('Brew', () => Main);
