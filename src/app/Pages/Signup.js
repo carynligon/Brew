@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import settings from '../settings';
 import { Home } from './Home';
-import { Signup } from './Signup';
+import { Login } from './Login';
 
-export class Login extends Component {
+export class Signup extends Component {
   constructor() {
     super();
     this.state = {
@@ -21,15 +21,23 @@ export class Login extends Component {
 
   }
 
-  switchSignup() {
+  switchLogin() {
     this.props.toggleNavBar();
     this.props.navigator.push({
-      title: "Signup",
-      component: Signup,
+      title: "Login",
+      component: Login,
       passProps: {
         toggleNavBar: this.props.toggleNavBar,
       }
     });
+  }
+
+  handleName(text) {
+    this.setState({name: text});
+  }
+
+  handleUsername(text) {
+    this.setState({username: text});
   }
 
   handleEmail(text) {
@@ -41,16 +49,26 @@ export class Login extends Component {
   }
 
   handlePress() {
-    fetch('https://api.backendless.com/v1/users/login', {
+    fetch('https://api.backendless.com/v1/users/register', {
       method: 'POST',
       headers: settings,
       body: JSON.stringify({
-        login: this.state.email,
+        name: this.state.name,
+        username: this.state.username,
+        email: this.state.email,
         password: this.state.password
       })
     })
     .then((response) => {
       if (response.status === 200) {
+        fetch('https://api.backendless.com/v1/users/login', {
+          method: 'POST',
+          headers: settings,
+          body: JSON.stringify({
+            login: this.state.email,
+            password: this.state.password
+          })
+        })
         this.setState({
           email: '',
           password: '',
@@ -86,7 +104,25 @@ export class Login extends Component {
     }
     return (
       <View style={styles.container}>
-        <Text style={styles.titleStyles}>Login</Text>
+        <Text style={styles.titleStyles}>Sign up</Text>
+        <Text>name</Text>
+        <TextInput
+          className="name"
+          ref="name"
+          style={inputStyle}
+          autoCapitalize="words"
+          accessibilityLabel="name"
+          onChangeText={this.handleName.bind(this)}
+        />
+        <Text>username</Text>
+        <TextInput
+          className="username"
+          ref="username"
+          style={inputStyle}
+          autoCapitalize="none"
+          accessibilityLabel="username"
+          onChangeText={this.handleUsername.bind(this)}
+        />
         <Text>email</Text>
         <TextInput
           className="email"
@@ -108,9 +144,9 @@ export class Login extends Component {
         />
         {errorMsg}
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
-          <Text>Login</Text>
+          <Text>add</Text>
         </TouchableOpacity>
-        <Text onPress={this.switchSignup.bind(this)}>Sign up!</Text>
+        <Text onPress={this.switchLogin.bind(this)}>Login!</Text>
       </View>
     )
   }
