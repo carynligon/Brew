@@ -8,6 +8,7 @@ import {
   NavigatorIOS
 } from 'react-native';
 import settings from '../settings';
+import store from '../Stores/index';
 import { Home } from './Home';
 import { Signup } from './Signup';
 
@@ -41,6 +42,7 @@ export class Login extends Component {
   }
 
   handlePress() {
+    store.dispatch({type: 'LOG_IN'});
     fetch('https://api.backendless.com/v1/users/login', {
       method: 'POST',
       headers: settings,
