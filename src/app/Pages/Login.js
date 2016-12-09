@@ -5,12 +5,31 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  NavigatorIOS
+  NavigatorIOS,
+  Platform
 } from 'react-native';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import devTools from 'remote-redux-devtools';
+import auth from '../Reducers/auth';
+
 import settings from '../settings';
-import store from '../Stores/index';
+// import store from '../Stores/index';
 import { Home } from './Home';
 import { Signup } from './Signup';
+
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(thunk),
+    devTools({
+      name: Platform.OS,
+      hostname: 'localhost',
+      port: 5678
+    })
+  );
+  return createStore(auth, initialState, enhancer);
+}
+configureStore();
 
 export class Login extends Component {
   constructor() {
@@ -42,7 +61,6 @@ export class Login extends Component {
   }
 
   handlePress() {
-    store.dispatch({type: 'LOG_IN'});
     fetch('https://api.backendless.com/v1/users/login', {
       method: 'POST',
       headers: settings,
