@@ -6,8 +6,8 @@ const initialState = {
 
 const auth = (state = initialState,action) => {
     switch(action.type) {
-        case 'LOG_IN':
-            return {loggingIn: true}
+        case 'LOGGED_IN':
+            return {...state, loggedIn: true}
         case 'SIGN_IN':
             return {signingIn: true}
         case 'LOG_OUT':

@@ -8,39 +8,14 @@ import {
   NavigatorIOS,
   Platform
 } from 'react-native';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import devTools from 'remote-redux-devtools';
-import auth from '../Reducers/auth';
 
 import settings from '../settings';
-// import store from '../Stores/index';
+import store from '../Stores/index';
+import {loggedIn, startLoad, stopLoad} from '../Actions/index';
 import { Home } from './Home';
 import { Signup } from './Signup';
 
-function configureStore(initialState) {
-  const enhancer = compose(
-    applyMiddleware(thunk),
-    devTools({
-      name: Platform.OS,
-      hostname: 'localhost',
-      port: 5678
-    })
-  );
-  return createStore(auth, initialState, enhancer);
-}
-configureStore();
-
 export class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: '',
-      password: ''
-    }
-
-  }
-
   switchSignup() {
     this.props.toggleNavBar();
     this.props.navigator.push({
@@ -51,16 +26,14 @@ export class Login extends Component {
       }
     });
   }
-
   handleEmail(text) {
     this.setState({email: text});
   }
-
   handlePassword(text) {
     this.setState({password: text});
   }
-
   handlePress() {
+    store.dispatch(startLoad());
     fetch('https://api.backendless.com/v1/users/login', {
       method: 'POST',
       headers: settings,
@@ -70,7 +43,9 @@ export class Login extends Component {
       })
     })
     .then((response) => {
+        store.dispatch(stopLoad());
       if (response.status === 200) {
+        store.dispatch(loggedIn())
         this.setState({
           email: '',
           password: '',
@@ -89,21 +64,9 @@ export class Login extends Component {
     })
     .catch((error) => {console.error(error)});
   }
-
   render() {
+    console.log(store.getState());
     let inputStyle = styles.textBox;
-    let errorMsg;
-    if (this.state.error) {
-      inputStyle = {
-        backgroundColor: '#FFF',
-        color: 'red',
-        height: 30,
-        margin: 15,
-        padding: 5,
-        textAlign: 'center'
-      }
-      errorMsg = (<Text style={{color: 'red'}}>invalid username or password</Text>);
-    }
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyles}>Login</Text>
@@ -126,7 +89,6 @@ export class Login extends Component {
           accessibilityLabel="password"
           onChangeText={this.handlePassword.bind(this)}
         />
-        {errorMsg}
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>Login</Text>
         </TouchableOpacity>
