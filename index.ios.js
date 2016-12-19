@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, NavigatorIOS } from 'react-native';
+import {
+    AppRegistry,
+    AsyncStorage,
+    NavigatorIOS,
+    StyleSheet,
+} from 'react-native';
 import { Login } from './src/app/Pages/Login';
+import { Home } from './src/app/Pages/Home';
 
 const firstRoute = {
   name: 'Login',
@@ -17,11 +23,22 @@ const Main = React.createClass({
   },
 
   render() {
+    let initialRoute = {
+        routeComponent: Login,
+        routeName: 'Login'
+    };
+    if (AsyncStorage.getItem('loggedIn') === true) {
+        initialRoute = {
+            routeComponent: Home,
+            routeName: 'Home'
+        }
+    }
+    console.warn(initialRoute.routeComponent)
     return (
       <NavigatorIOS
         initialRoute={{
-          component: Login,
-          title: 'Login',
+          component: initialRoute.routeComponent,
+          title: initialRoute.routeName,
           passProps: {
             toggleNavBar: this.toggleNavBar
           }

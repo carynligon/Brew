@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-  View,
+  AsyncStorage,
+  NavigatorIOS,
+  Platform,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  NavigatorIOS,
-  Platform
+  View,
 } from 'react-native';
 
 import settings from '../settings';
@@ -51,6 +52,7 @@ export class Login extends Component {
           password: '',
         });
         this.props.toggleNavBar();
+        AsyncStorage.setItem('loggedIn', true);
         this.props.navigator.push({
           title: "Home Page",
           component: Home,
