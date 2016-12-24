@@ -8,14 +8,18 @@ import {
 import { Login } from './src/app/Pages/Login';
 import { Home } from './src/app/Pages/Home';
 
-const firstRoute = {
-  name: 'Login',
-  component: Login
-};
-
 const Main = React.createClass({
   getInitialState() {
-    return {navigationBarHidden: false}
+    let loggedIn;
+    AsyncStorage.getItem('loggedIn', (err, result) => {
+        if (result === 'true') {
+            console.warn('anything')
+            loggedIn =  true;
+        } else {
+            loggedIn = false;
+        }
+    });
+    return {navigationBarHidden: false, loggedIn: loggedIn}
   },
 
   toggleNavBar() {
@@ -23,17 +27,19 @@ const Main = React.createClass({
   },
 
   render() {
-    let initialRoute = {
-        routeComponent: Login,
-        routeName: 'Login'
-    };
-    if (AsyncStorage.getItem('loggedIn') === true) {
+    let initialRoute;
+    if (this.state.loggedIn) {
         initialRoute = {
             routeComponent: Home,
             routeName: 'Home'
         }
+    } else {
+        initialRoute = {
+            routeComponent: Login,
+            routeName: 'Login'
+        }
     }
-    console.warn(initialRoute.routeComponent)
+    console.warn(this.state.loggedIn)
     return (
       <NavigatorIOS
         initialRoute={{

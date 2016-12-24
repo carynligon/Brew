@@ -52,7 +52,7 @@ export class Login extends Component {
           password: '',
         });
         this.props.toggleNavBar();
-        AsyncStorage.setItem('loggedIn', true);
+        AsyncStorage.setItem('loggedIn', 'true');
         this.props.navigator.push({
           title: "Home Page",
           component: Home,
