@@ -17,6 +17,10 @@ import { Home } from './Home';
 import { Signup } from './Signup';
 
 export class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   switchSignup() {
     this.props.toggleNavBar();
     this.props.navigator.push({
@@ -64,11 +68,15 @@ export class Login extends Component {
         this.setState({error: true});
       }
     })
-    .catch((error) => {console.error(error)});
+    .catch((error) => {console.error("login error: " + error)});
   }
   render() {
-    console.log(store.getState());
     let inputStyle = styles.textBox;
+    let errorMessage;
+    if (this.state.error) {
+      inputStyle = styles.error;
+      errorMessage = "Invalid email or password"
+    }
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyles}>Login</Text>
@@ -91,6 +99,7 @@ export class Login extends Component {
           accessibilityLabel="password"
           onChangeText={this.handlePassword.bind(this)}
         />
+        <Text style={styles.errorMsg}>{errorMessage}</Text>
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>Login</Text>
         </TouchableOpacity>
@@ -117,6 +126,20 @@ const styles = StyleSheet.create({
     margin: 15,
     padding: 5,
     textAlign: 'center'
+  },
+  error: {
+    backgroundColor: '#FFF',
+    borderColor: 'red',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    height: 30,
+    margin: 15,
+    padding: 5,
+    textAlign: 'center'
+  },
+  errorMsg: {
+    color: 'red',
+    marginBottom: 10
   },
   button: {
     backgroundColor: '#34edcc',

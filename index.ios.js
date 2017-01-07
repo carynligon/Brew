@@ -10,20 +10,21 @@ import { Home } from './src/app/Pages/Home';
 
 const Main = React.createClass({
   getInitialState() {
-    let loggedIn;
-    AsyncStorage.getItem('loggedIn', (err, result) => {
-        if (result === 'true') {
-            console.warn('anything')
-            loggedIn =  true;
-        } else {
-            loggedIn = false;
-        }
-    });
-    return {navigationBarHidden: false, loggedIn: loggedIn}
+    return {navigationBarHidden: false, loggedIn: false};
   },
 
   toggleNavBar() {
     this.setState({navigationBarHidden: !this.state.navigationBarHidden});
+  },
+
+  componentWillMount() {
+    AsyncStorage.getItem('loggedIn').then((value) => {
+      if (value === 'yes') {
+        this.setState(loggedIn: true);
+      } else {
+        this.setState({loggedIn: false});
+      }
+    });
   },
 
   render() {
@@ -39,7 +40,6 @@ const Main = React.createClass({
             routeName: 'Login'
         }
     }
-    console.warn(this.state.loggedIn)
     return (
       <NavigatorIOS
         initialRoute={{

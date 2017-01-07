@@ -33,18 +33,32 @@ export class Signup extends Component {
   }
 
   handleName(text) {
+    let regexp = /^[a-zA-Z_.-_--]+/;
+    if (text.match(regexp) === null || text.length < 2) {
+      this.setState({invalidName: true});
+    } else {
+      this.setState({invalidName: false});
+    }
     this.setState({name: text});
   }
 
-  handleUsername(text) {
-    this.setState({username: text});
-  }
-
   handleEmail(text) {
+    let regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (text.match(regexp) === null) {
+      this.setState({invalidEmail: true});
+    } else {
+      this.setState({invalidEmail: false});
+    }
     this.setState({email: text});
   }
 
   handlePassword(text) {
+    let regexp = /^(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+    if (text.match(regexp) === null) {
+      this.setState({invalidPassword: true});
+    } else {
+      this.setState({invalidPassword: false});
+    }
     this.setState({password: text});
   }
 
@@ -89,6 +103,7 @@ export class Signup extends Component {
   }
 
   render() {
+    console.log(this.state);
     let inputStyle = styles.textBox;
     let errorMsg;
     if (this.state.error) {
@@ -113,15 +128,6 @@ export class Signup extends Component {
           autoCapitalize="words"
           accessibilityLabel="name"
           onChangeText={this.handleName.bind(this)}
-        />
-        <Text>username</Text>
-        <TextInput
-          className="username"
-          ref="username"
-          style={inputStyle}
-          autoCapitalize="none"
-          accessibilityLabel="username"
-          onChangeText={this.handleUsername.bind(this)}
         />
         <Text>email</Text>
         <TextInput
