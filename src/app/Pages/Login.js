@@ -20,6 +20,15 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    AsyncStorage.getItem('loggedIn').then((data) => {
+      if (data) {
+        console.log(data)
+        this.setState({loggedIn: 'yes'});
+      }
+      else {
+        return this.setState({loggedIn: 'no'});
+      }
+    });
   }
   switchSignup() {
     this.props.toggleNavBar();
@@ -55,8 +64,8 @@ export class Login extends Component {
           email: '',
           password: '',
         });
-        this.props.toggleNavBar();
         AsyncStorage.setItem('loggedIn', 'true');
+        this.props.toggleNavBar();
         this.props.navigator.push({
           title: "Home Page",
           component: Home,
@@ -73,10 +82,6 @@ export class Login extends Component {
   render() {
     let inputStyle = styles.textBox;
     let errorMessage;
-    if (this.state.error) {
-      inputStyle = styles.error;
-      errorMessage = "Invalid email or password"
-    }
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyles}>Login</Text>
@@ -125,6 +130,7 @@ const styles = StyleSheet.create({
     height: 30,
     margin: 15,
     padding: 5,
+    width: 200,
     textAlign: 'center'
   },
   error: {

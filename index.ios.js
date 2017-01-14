@@ -5,12 +5,12 @@ import {
     NavigatorIOS,
     StyleSheet,
 } from 'react-native';
-import { Login } from './src/app/Pages/Login';
-import { Home } from './src/app/Pages/Home';
+import App from './src/app/Pages/App';
 
 const Main = React.createClass({
   getInitialState() {
-    return {navigationBarHidden: false, loggedIn: false};
+    // AsyncStorage.removeItem('loggedIn')
+    return {navigationBarHidden: false};
   },
 
   toggleNavBar() {
@@ -18,7 +18,7 @@ const Main = React.createClass({
   },
 
   componentWillMount() {
-    AsyncStorage.getItem('loggedIn').then((value) => {
+    AsyncStorage.getItem('loggedIn').done((value) => {
       if (value === 'yes') {
         this.setState(loggedIn: true);
       } else {
@@ -28,18 +28,10 @@ const Main = React.createClass({
   },
 
   render() {
-    let initialRoute;
-    if (this.state.loggedIn) {
-        initialRoute = {
-            routeComponent: Home,
-            routeName: 'Home'
+    let initialRoute = {
+            routeComponent: App,
+            routeName: 'App'
         }
-    } else {
-        initialRoute = {
-            routeComponent: Login,
-            routeName: 'Login'
-        }
-    }
     return (
       <NavigatorIOS
         initialRoute={{

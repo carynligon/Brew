@@ -32,7 +32,7 @@ export class Signup extends Component {
     });
   }
 
-  handleName(text) {
+  handleName(stext) {
     let regexp = /^[a-zA-Z_.-_--]+/;
     if (text.match(regexp) === null || text.length < 2) {
       this.setState({invalidName: true});
