@@ -5,13 +5,48 @@ import {
   NavigatorIOS,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 
+import settings from '../settings';
+import { Login } from './Login';
+
 export class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+  logout() {
+    fetch('https://api.backendless.com/v1/users/logout', {
+      method: 'GET',
+      headers: {...settings, "user-token": this.props.user["user-token"]}
+    })
+    .then((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        AsyncStorage.removeItem('token');
+        this.props.toggleNavBar();
+        this.props.navigator.push({
+          title: "Login",
+          component: Login,
+          passProps: {
+            toggleNavBar: this.props.toggleNavBar,
+          }
+        });
+      }
+    })
+    .catch((error) => {console.error("login error: " + error)});
+  }
   render() {
+    console.log(this.props)
     return (
       <View>
+        <TouchableOpacity
+          style={styles.logout}
+          onPress={this.logout}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
         <View className="feed_item" style={styles.view}>
             <Image
               style={{width: 500, height: 350}}
@@ -40,4 +75,7 @@ const styles = StyleSheet.create({
     height: 300,
     width: 300
   },
+  logout: {
+    marginTop: 100
+  }
 });

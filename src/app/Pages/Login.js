@@ -59,20 +59,23 @@ export class Login extends Component {
     .then((response) => {
         store.dispatch(stopLoad());
       if (response.status === 200) {
-        store.dispatch(loggedIn())
-        this.setState({
-          email: '',
-          password: '',
-        });
-        AsyncStorage.setItem('loggedIn', 'true');
-        this.props.toggleNavBar();
-        this.props.navigator.push({
-          title: "Home Page",
-          component: Home,
-          passProps: {
-            toggleNavBar: this.props.toggleNavBar,
-          }
-        });
+        response.json().then((data) => {
+          AsyncStorage.setItem('token', data["user-token"]);
+          this.setState({user: data});
+          this.setState({
+            email: '',
+            password: '',
+          });
+          this.props.toggleNavBar();
+          this.props.navigator.push({
+            title: "Home Page",
+            component: Home,
+            passProps: {
+              toggleNavBar: this.props.toggleNavBar,
+              user: this.state.user
+            }
+          });
+        })
       } else {
         this.setState({error: true});
       }
@@ -80,6 +83,7 @@ export class Login extends Component {
     .catch((error) => {console.error("login error: " + error)});
   }
   render() {
+    console.log(this.state)
     let inputStyle = styles.textBox;
     let errorMessage;
     return (
