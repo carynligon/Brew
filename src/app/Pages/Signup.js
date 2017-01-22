@@ -4,9 +4,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   NavigatorIOS
 } from 'react-native';
+
+import styles from '../Styles/signup';
 import settings from '../settings';
 import { Home } from './Home';
 import { Login } from './Login';
@@ -32,12 +33,12 @@ export class Signup extends Component {
     });
   }
 
-  handleName(stext) {
+  handleName(text) {
     let regexp = /^[a-zA-Z_.-_--]+/;
     if (text.match(regexp) === null || text.length < 2) {
-      this.setState({invalidName: true});
+      this.setState({error: true});
     } else {
-      this.setState({invalidName: false});
+      this.setState({error: false});
     }
     this.setState({name: text});
   }
@@ -45,9 +46,9 @@ export class Signup extends Component {
   handleEmail(text) {
     let regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (text.match(regexp) === null) {
-      this.setState({invalidEmail: true});
+      this.setState({error: true});
     } else {
-      this.setState({invalidEmail: false});
+      this.setState({error: false});
     }
     this.setState({email: text});
   }
@@ -55,9 +56,9 @@ export class Signup extends Component {
   handlePassword(text) {
     let regexp = /^(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
     if (text.match(regexp) === null) {
-      this.setState({invalidPassword: true});
+      this.setState({error: true});
     } else {
-      this.setState({invalidPassword: false});
+      this.setState({error: false});
     }
     this.setState({password: text});
   }
@@ -107,14 +108,7 @@ export class Signup extends Component {
     let inputStyle = styles.textBox;
     let errorMsg;
     if (this.state.error) {
-      inputStyle = {
-        backgroundColor: '#FFF',
-        color: 'red',
-        height: 30,
-        margin: 15,
-        padding: 5,
-        textAlign: 'center'
-      }
+      inputStyle = styles.error;
       errorMsg = (<Text style={{color: 'red'}}>invalid username or password</Text>);
     }
     return (
@@ -157,32 +151,3 @@ export class Signup extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  titleStyles: {
-    fontSize: 30,
-    marginBottom: 15
-  },
-  textBox: {
-    backgroundColor: '#FFF',
-    height: 30,
-    margin: 15,
-    padding: 5,
-    textAlign: 'center'
-  },
-  button: {
-    backgroundColor: '#34edcc',
-    marginTop: 5,
-    padding: 5
-  },
-  viewStyles: {
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});

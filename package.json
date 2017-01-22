@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "watch-styles": "sass --watch ./src/app/SCSS/main.scss:./dist/styles.css",
+    "css-js": "react-native-css -i ./dist/styles.css -o ./dist/styles.js --watch --pretty"
   },
   "dependencies": {
     "react": "15.4.1",
@@ -18,11 +18,9 @@
     "babel-jest": "17.0.2",
     "babel-preset-react-native": "1.9.0",
     "jest": "17.0.3",
+    "react-native-css": "^1.2.45",
     "react-test-renderer": "15.4.1",
     "remote-redux-devtools": "^0.5.5",
     "remote-redux-devtools-on-debugger": "^0.7.0"
-  },
-  "scripts": {
-    "postinstall": "remotedev-debugger --hostname localhost --port 5678 --injectserver"
   }
 }

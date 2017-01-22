@@ -9,7 +9,6 @@ import App from './src/app/Pages/App';
 
 const Main = React.createClass({
   getInitialState() {
-    // AsyncStorage.removeItem('loggedIn')
     return {navigationBarHidden: false};
   },
 
@@ -18,9 +17,9 @@ const Main = React.createClass({
   },
 
   componentWillMount() {
-    AsyncStorage.getItem('loggedIn').done((value) => {
-      if (value === 'yes') {
-        this.setState(loggedIn: true);
+    AsyncStorage.getItem('token').done((value) => {
+      if (value) {
+        this.setState({loggedIn: true});
       } else {
         this.setState({loggedIn: false});
       }

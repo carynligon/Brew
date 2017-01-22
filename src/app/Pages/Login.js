@@ -3,13 +3,13 @@ import {
   AsyncStorage,
   NavigatorIOS,
   Platform,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 
+import styles from '../Styles/login';
 import settings from '../settings';
 import store from '../Stores/index';
 import {loggedIn, startLoad, stopLoad} from '../Actions/index';
@@ -60,7 +60,11 @@ export class Login extends Component {
         store.dispatch(stopLoad());
       if (response.status === 200) {
         response.json().then((data) => {
-          AsyncStorage.setItem('token', data["user-token"]);
+            console.log(data)
+          AsyncStorage.multiSet([
+            ['token', data["user-token"]],
+            ['id', data["objectId"]]
+            ]);
           this.setState({user: data});
           this.setState({
             email: '',
@@ -86,6 +90,9 @@ export class Login extends Component {
     console.log(this.state)
     let inputStyle = styles.textBox;
     let errorMessage;
+    if (this.state.error) {
+        inputStyle = styles.error;
+    }
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyles}>Login</Text>
@@ -117,47 +124,3 @@ export class Login extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  titleStyles: {
-    fontSize: 30,
-    marginBottom: 15
-  },
-  textBox: {
-    backgroundColor: '#FFF',
-    height: 30,
-    margin: 15,
-    padding: 5,
-    width: 200,
-    textAlign: 'center'
-  },
-  error: {
-    backgroundColor: '#FFF',
-    borderColor: 'red',
-    borderStyle: 'solid',
-    borderWidth: 2,
-    height: 30,
-    margin: 15,
-    padding: 5,
-    textAlign: 'center'
-  },
-  errorMsg: {
-    color: 'red',
-    marginBottom: 10
-  },
-  button: {
-    backgroundColor: '#34edcc',
-    marginTop: 5,
-    padding: 5
-  },
-  viewStyles: {
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});

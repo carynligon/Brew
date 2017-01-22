@@ -3,12 +3,12 @@ import {
   AsyncStorage,
   Image,
   NavigatorIOS,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 
+import styles from '../Styles/home';
 import settings from '../settings';
 import { Login } from './Login';
 
@@ -60,22 +60,3 @@ export class Home extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  view: {
-    height: 400,
-    width: 400
-  },
-  img: {
-    backgroundColor: '#34EAD6',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 100,
-    height: 300,
-    width: 300
-  },
-  logout: {
-    marginTop: 100
-  }
-});
