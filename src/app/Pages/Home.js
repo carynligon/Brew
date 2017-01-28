@@ -10,17 +10,23 @@ import {
 
 import styles from '../Styles/home';
 import settings from '../settings';
-import { Login } from './Login';
+import { Timer } from '../Components/timer';
 
 export class Home extends React.Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
+    AsyncStorage.getItem('token').then((data) => {
+      if (data) {
+        console.log(data)
+        this.setState({token: data});
+      }
+    });
   }
   logout() {
     fetch('https://api.backendless.com/v1/users/logout', {
       method: 'GET',
-      headers: {...settings, "user-token": this.props.user["user-token"]}
+      headers: {...settings, "user-token": this.state.token}
     })
     .then((response) => {
       console.log(response);
@@ -47,15 +53,7 @@ export class Home extends React.Component {
           onPress={this.logout}>
           <Text>Logout</Text>
         </TouchableOpacity>
-        <View className="feed_item" style={styles.view}>
-            <Image
-              style={{width: 500, height: 350}}
-              source={{uri:"https://images.contentful.com/3h0qt25be5vd/5PvJBfq0EM208C4MmkcsQu/9940a19d6310f63dd9ff71649b590470/Brew_Guide-Chemex-Step05.jpg?w=960&h=640&fm=jpg&q=70"}}
-            />
-            <Text>
-                Chemex
-            </Text>
-        </View>
+        <Timer />
       </View>
     );
   }

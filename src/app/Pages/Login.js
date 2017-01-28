@@ -20,7 +20,7 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    AsyncStorage.getItem('loggedIn').then((data) => {
+    AsyncStorage.getItem('token').then((data) => {
       if (data) {
         console.log(data)
         this.setState({loggedIn: 'yes'});
