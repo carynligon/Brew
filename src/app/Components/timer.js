@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
+import Instructions from './instructions';
 
 export class Timer extends Component {
     constructor(props) {
@@ -45,6 +46,7 @@ export class Timer extends Component {
         console.log(this.state)
         return (
             <View>
+                <Instructions time={this.state.totalSeconds} />
                 <TouchableOpacity
                     onPress={this.startTimer.bind(this)}>
                   <Text>Start Timer</Text>
