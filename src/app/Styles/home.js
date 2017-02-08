@@ -1,20 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  view: {
-    height: 400,
-    width: 400
+  container: {
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
   },
   img: {
-    backgroundColor: '#34EAD6',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 100,
-    height: 300,
-    width: 300
   },
   logout: {
-    marginTop: 100
+    alignSelf: 'flex-start',
+    marginTop: 15,
   }
 });

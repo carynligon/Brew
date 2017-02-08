@@ -47,12 +47,7 @@ export class Home extends React.Component {
   render() {
     console.log(this.props)
     return (
-      <View>
-        <TouchableOpacity
-          style={styles.logout}
-          onPress={this.logout}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
+      <View style={styles.container}>
         <Timer />
       </View>
     );

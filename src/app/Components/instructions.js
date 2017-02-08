@@ -5,6 +5,8 @@ import {
 } from 'react-native';
 import chemexObj from '../Config/Methods/chemex';
 
+import styles from '../Styles/components/timer';
+
 
 export default class Instructions extends Component {
     constructor(props) {
@@ -12,7 +14,7 @@ export default class Instructions extends Component {
         this.state = {currentStep: null};
     }
     render() {
-        let instruction;
+        let instruction = "get ready!";
         if (this.props.time <= chemexObj.steps[0].time.stop) {
             instruction = chemexObj.steps[0].directions;
         }
@@ -23,8 +25,8 @@ export default class Instructions extends Component {
             instruction = chemexObj.steps[2].directions;
         }
         return (
-            <View>
-                <Text>
+            <View style={styles.instructionsContainer}>
+                <Text style={styles.instructionsText}>
                     {instruction}
                 </Text>
             </View>

@@ -8,6 +8,8 @@ import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 import Instructions from './instructions';
 
+import styles from '../Styles/components/timer';
+
 export class Timer extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +17,8 @@ export class Timer extends Component {
             minutes: 0,
             seconds: 0,
             timerTextMins: '00',
-            timerTextSecs: '00'
+            timerTextSecs: '00',
+            timerText: '00:00',
         };
         this.timer;
     }
@@ -45,15 +48,16 @@ export class Timer extends Component {
     render() {
         console.log(this.state)
         return (
-            <View>
+            <View style={styles.container}>
                 <Instructions time={this.state.totalSeconds} />
+                <Text style={styles.timerText}>
+                    {this.state.timerText}
+                </Text>
                 <TouchableOpacity
+                    style={styles.startBtn}
                     onPress={this.startTimer.bind(this)}>
                   <Text>Start Timer</Text>
                 </TouchableOpacity>
-                <Text>
-                    {this.state.timerText}
-                </Text>
             </View>
             );
     }
