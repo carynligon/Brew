@@ -14,15 +14,14 @@ export default class Instructions extends Component {
         this.state = {currentStep: null};
     }
     render() {
-        let instruction = "get ready!";
-        if (this.props.time <= chemexObj.steps[0].time.stop) {
-            instruction = chemexObj.steps[0].directions;
-        }
-        else if (this.props.time <= chemexObj.steps[1].time.stop) {
-            instruction = chemexObj.steps[1].directions;
-        }
-        else if (this.props.time <= chemexObj.steps[2].time.stop) {
-            instruction = chemexObj.steps[2].directions;
+        let instruction = chemexObj.steps[0].directions;
+        let upNext = chemexObj.steps[1].directions;
+        console.log(chemexObj.steps.length);
+        for (i=0; i<chemexObj.steps.length-1; i++) {
+            if (this.props.time <= chemexObj.steps[i].time.stop) {
+                instruction = chemexObj.steps[i].directions;
+                upNext = chemexObj.steps[i+1].directions;
+            }
         }
         return (
             <View style={styles.instructionsContainer}>

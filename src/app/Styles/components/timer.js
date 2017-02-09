@@ -23,5 +23,10 @@ export default StyleSheet.create({
         fontSize: 16,
         marginBottom: 20,
         textAlign: 'center',
+    },
+    nextStep: {
+        fontSize: 12,
+        marginBottom: 20,
+        textAlign: 'center',
     }
 });
