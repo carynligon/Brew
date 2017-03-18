@@ -14,19 +14,25 @@ export default class Instructions extends Component {
         this.state = {currentStep: null};
     }
     render() {
-        let instruction = chemexObj.steps[0].directions;
+        let instruction = '';
         let upNext = chemexObj.steps[1].directions;
         let changeTimes = chemexObj.steps.map((step) => {
             return step.time.stop;
         });
-        if (this.props.time <= changeTimes[0]) {
-            instruction = chemexObj.steps[0].directions;
-        }
-        else if (this.props.time <= changeTimes[1] && this.props.time >= changeTimes[0]) {
-            instruction = chemexObj.steps[1].directions;
-        }
-        else {
-            instruction = chemexObj.steps[2].directions;
+        console.log(this.props)
+        if (this.props.time) {
+            if (this.props.time <= changeTimes[0]) {
+                instruction = chemexObj.steps[0].directions;
+            }
+            else if (this.props.time <= changeTimes[1] && this.props.time >= changeTimes[0]) {
+                instruction = chemexObj.steps[1].directions;
+            }
+            else if (this.props.time >= chemexObj.time) {
+                this.props.resetTimer();
+            }
+            else {
+                instruction = chemexObj.steps[2].directions;
+            }
         }
         return (
             <View style={styles.instructionsContainer}>
