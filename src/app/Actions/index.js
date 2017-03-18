@@ -1,3 +1,5 @@
+import { increaseTime, startTimer, pauseTimer, resetTimer } from './timer';
+
 export const startLoad = () => {
       return {
         type: 'START_LOAD'
@@ -15,3 +17,8 @@ export const loggedIn = () => {
         type: 'LOGGED_IN'
     }
 }
+
+increaseTime;
+startTimer;
+pauseTimer;
+resetTimer;

@@ -11,7 +11,7 @@ import {
 
 import styles from '../Styles/login';
 import settings from '../settings';
-import store from '../Stores/index';
+import store from '../store';
 import {loggedIn, startLoad, stopLoad} from '../Actions/index';
 import { Home } from './Home';
 import { Signup } from './Signup';

@@ -1,22 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  button: {
+    backgroundColor: '#34edcc',
+    marginTop: 5,
+    padding: 5
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  titleStyles: {
-    fontSize: 30,
-    marginBottom: 15
-  },
-  textBox: {
-    backgroundColor: '#FFF',
-    height: 30,
-    margin: 15,
-    padding: 5,
-    textAlign: 'center'
   },
   error: {
     backgroundColor: '#FFF',
@@ -28,10 +22,16 @@ export default StyleSheet.create({
     padding: 5,
     textAlign: 'center'
   },
-  button: {
-    backgroundColor: '#34edcc',
-    marginTop: 5,
-    padding: 5
+  textBox: {
+    backgroundColor: '#FFF',
+    height: 30,
+    margin: 15,
+    padding: 5,
+    textAlign: 'center'
+  },
+  titleStyles: {
+    fontSize: 30,
+    marginBottom: 15
   },
   viewStyles: {
     alignItems: 'center',

@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import load from './load';
 
-const Brew = combineReducers({
+const rootReducer = combineReducers({
   auth,
   load
 });
 
-export default Brew;
+export default rootReducer;

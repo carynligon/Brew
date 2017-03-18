@@ -5,15 +5,6 @@ export default StyleSheet.create({
         // flex: 1,
         alignItems: 'center',
     },
-    timerText: {
-        fontSize: 20,
-        marginBottom: 20,
-    },
-    startBtn: {
-        backgroundColor: '#fff',
-        borderRadius: 3,
-        padding: 5,
-    },
     instructionsContainer: {
         alignSelf: 'stretch',
         paddingRight: 20,
@@ -28,5 +19,18 @@ export default StyleSheet.create({
         fontSize: 12,
         marginBottom: 20,
         textAlign: 'center',
+    },
+    resetBtn: {
+        textDecorationLine: 'underline'
+    },
+    startBtn: {
+        backgroundColor: 'gray',
+        borderRadius: 3,
+        marginTop: 10,
+        padding: 5,
+    },
+    timerText: {
+        fontSize: 20,
+        marginBottom: 20,
     }
 });

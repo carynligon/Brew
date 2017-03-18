@@ -16,12 +16,17 @@ export default class Instructions extends Component {
     render() {
         let instruction = chemexObj.steps[0].directions;
         let upNext = chemexObj.steps[1].directions;
-        console.log(chemexObj.steps.length);
-        for (i=0; i<chemexObj.steps.length-1; i++) {
-            if (this.props.time <= chemexObj.steps[i].time.stop) {
-                instruction = chemexObj.steps[i].directions;
-                upNext = chemexObj.steps[i+1].directions;
-            }
+        let changeTimes = chemexObj.steps.map((step) => {
+            return step.time.stop;
+        });
+        if (this.props.time <= changeTimes[0]) {
+            instruction = chemexObj.steps[0].directions;
+        }
+        else if (this.props.time <= changeTimes[1] && this.props.time >= changeTimes[0]) {
+            instruction = chemexObj.steps[1].directions;
+        }
+        else {
+            instruction = chemexObj.steps[2].directions;
         }
         return (
             <View style={styles.instructionsContainer}>

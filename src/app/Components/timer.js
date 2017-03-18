@@ -7,6 +7,7 @@ import {
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 import Instructions from './instructions';
+import ProgressBar from './progress_bar';
 
 import styles from '../Styles/components/timer';
 
@@ -46,17 +47,20 @@ export class Timer extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <View style={styles.container}>
                 <Instructions time={this.state.totalSeconds} />
                 <Text style={styles.timerText}>
                     {this.state.timerText}
                 </Text>
+                <ProgressBar time={this.state.totalSeconds} />
                 <TouchableOpacity
                     style={styles.startBtn}
                     onPress={this.startTimer.bind(this)}>
                   <Text>Start Timer</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={styles.resetBtn}>Reset</Text>
                 </TouchableOpacity>
             </View>
             );

@@ -10,7 +10,7 @@ export default chemexObj = {
             directions: 'Pouring in concentric circles, saturate grounds with 80g of water'
         }, {
             order: 2,
-            time: { start: 30, stop: 240},
+            time: { start: 30, stop: 230},
             directions: 'Continue, slowly pouring in concentric circles'
         }, {
             order: 3,
