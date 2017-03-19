@@ -71,6 +71,7 @@ export class Timer extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <View style={styles.container}>
                 <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} />

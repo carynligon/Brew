@@ -75,7 +75,7 @@ export class Login extends Component {
             title: "Home Page",
             component: Home,
             passProps: {
-              toggleNavBar: this.props.toggleNavBar,
+              ...this.props,
               user: this.state.user
             }
           });

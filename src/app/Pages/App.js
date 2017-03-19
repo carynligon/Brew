@@ -17,7 +17,7 @@ import { Home } from './Home';
 import { Login } from './Login';
 import { Signup } from './Signup';
 
-export default class App extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -44,7 +44,7 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.props.navigator);
+    console.log('props', this.props);
     let inputStyle = styles.textBox;
     let errorMessage;
     let stuff;
@@ -54,9 +54,9 @@ export default class App extends Component {
     }
     if (this.state.loggedIn) {
       if (this.state.loggedIn === 'yes') {
-        stuff = <Home toggleNavBar={this.props.toggleNavBar} navigator={this.props.navigator}/>
+        stuff = <Home {...this.props} />
       } else {
-        stuff = <Login toggleNavBar={this.props.toggleNavBar} navigator={this.props.navigator}/>
+        stuff = <Login {...this.props} />
       }
     }
     return (
@@ -66,3 +66,22 @@ export default class App extends Component {
     )
   }
 }
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as ActionCreators from '../Actions/index';
+
+function mapStateToProps(state) {
+    return {
+        time: 0
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
+}
+
+// the (Main) is taking the main component and add all the props and data from state to props and add all action creators
+const App = connect(mapStateToProps, mapDispatchToProps)(Main);
+
+export default App;

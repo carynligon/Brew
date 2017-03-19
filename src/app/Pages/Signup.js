@@ -92,9 +92,7 @@ export class Signup extends Component {
         this.props.navigator.push({
           title: "Home Page",
           component: Home,
-          passProps: {
-            toggleNavBar: this.props.toggleNavBar,
-          }
+          passProps: {...this.props}
         });
       } else {
         this.setState({error: true});

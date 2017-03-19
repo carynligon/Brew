@@ -6,6 +6,8 @@ import {
     StyleSheet,
 } from 'react-native';
 import App from './src/app/Pages/App';
+import { Provider } from 'react-redux';
+import store from './src/app/store';
 
 const Main = React.createClass({
   getInitialState() {
@@ -32,17 +34,19 @@ const Main = React.createClass({
             routeName: 'App'
         }
     return (
-      <NavigatorIOS
-        initialRoute={{
-          component: initialRoute.routeComponent,
-          title: initialRoute.routeName,
-          passProps: {
-            toggleNavBar: this.toggleNavBar
-          }
-        }}
-        navigationBarHidden={true}
-        style={{flex: 1}}
-      />
+      <Provider store={store}>
+          <NavigatorIOS
+            initialRoute={{
+              component: initialRoute.routeComponent,
+              title: initialRoute.routeName,
+              passProps: {
+                toggleNavBar: this.toggleNavBar
+              }
+            }}
+            navigationBarHidden={true}
+            style={{flex: 1}}
+          />
+      </Provider>
     )
   }
 });

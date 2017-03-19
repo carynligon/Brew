@@ -48,7 +48,7 @@ export class Home extends React.Component {
     console.log(this.props)
     return (
       <View style={styles.container}>
-        <Timer />
+        <Timer {...this.props} />
       </View>
     );
   }

@@ -30,7 +30,7 @@ export default StyleSheet.create({
         padding: 5,
     },
     timerText: {
-        fontSize: 20,
+        fontSize: 70,
         marginBottom: 20,
     }
 });

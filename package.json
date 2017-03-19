@@ -21,6 +21,7 @@
     "babel-preset-react-native": "1.9.0",
     "jest": "17.0.3",
     "react-native-css": "^1.2.45",
+    "react-redux": "^5.0.3",
     "react-test-renderer": "15.4.1",
     "remote-redux-devtools": "^0.5.5",
     "remote-redux-devtools-on-debugger": "^0.7.0"
