@@ -6,8 +6,11 @@ import {
 } from 'react-native';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
+import Header from './header';
 import Instructions from './instructions';
 import ProgressBar from './progress_bar';
+
+import chemexObj from '../Config/Methods/chemex';
 
 import styles from '../Styles/components/timer';
 
@@ -15,6 +18,8 @@ export class Timer extends Component {
     constructor(props) {
         super(props);
         this.initialState = {
+            enableStart: false,
+            instruction: 0,
             minutes: 0,
             running: false,
             seconds: 0,
@@ -24,8 +29,25 @@ export class Timer extends Component {
         }
         this.state = this.initialState;
         this.timer;
+        this.enableStart = this.enableStart.bind(this);
+        this.nextStep = this.nextStep.bind(this);
         this.startTimer = this.startTimer.bind(this);
         this.pauseTimer = this.pauseTimer.bind(this);
+    }
+
+    enableStart() {
+        this.setState({enableStart: true});
+    }
+
+    nextStep() {
+        console.log(chemexObj.nonTimedSteps.length);
+        console.log(this.state.instruction)
+        if (chemexObj.nonTimedSteps.length - 1 === this.state.instruction) {
+            this.enableStart();
+        }
+        else {
+            this.setState({instruction: this.state.instruction + 1});
+        }
     }
 
     updateSomething() {
@@ -48,6 +70,7 @@ export class Timer extends Component {
 
     pauseTimer() {
         clearTimeout(this.timer);
+        this.setState({running: false});
     }
 
     startTimer() {
@@ -55,13 +78,17 @@ export class Timer extends Component {
     }
 
     handleStartStop() {
-        if (this.state.running) {
-            console.log('running')
-            this.pauseTimer();
+        if (this.state.enableStart) {
+            if (this.state.running) {
+                this.pauseTimer();
+            }
+            else {
+                console.log('not running')
+                this.startTimer();
+            }
         }
         else {
-            console.log('not running')
-            this.startTimer();
+            this.nextStep();
         }
     }
 
@@ -71,10 +98,20 @@ export class Timer extends Component {
     }
 
     render() {
-        console.log(this.props)
+        let timerText = 'next';
+        if (this.state.enableStart) {
+            if (this.state.running) {
+                timerText = 'pause';
+            }
+            else {
+                timerText = 'start';
+            }
+        }
+
         return (
             <View style={styles.container}>
-                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} />
+                <Header />
+                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} enableStart={this.enableStart} />
                 <Text style={styles.timerText}>
                     {this.state.timerText}
                 </Text>
@@ -82,7 +119,7 @@ export class Timer extends Component {
                 <TouchableOpacity
                     style={styles.startBtn}
                     onPress={this.handleStartStop.bind(this)}>
-                  <Text>Start Timer</Text>
+                  <Text style={styles.startText}>{timerText}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={this.resetTimer.bind(this)}>
