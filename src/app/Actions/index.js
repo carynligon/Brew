@@ -22,9 +22,11 @@ export const increaseTime = () => {
     }
 }
 
-export const startTimer = () => {
+export const startTimer = (time) => {
+    console.log('start timer actions')
     return {
-        type: 'START_TIMER'
+        type: 'START_TIMER',
+        time
     }
 }
 

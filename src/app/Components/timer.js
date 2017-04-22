@@ -40,8 +40,6 @@ export class Timer extends Component {
     }
 
     nextStep() {
-        console.log(chemexObj.nonTimedSteps.length);
-        console.log(this.state.instruction)
         if (chemexObj.nonTimedSteps.length - 1 === this.state.instruction) {
             this.enableStart();
         }
@@ -65,7 +63,10 @@ export class Timer extends Component {
               this.setState({minutes: this.state.minutes + 1, seconds: 0});
               this.setState({timerText: '0' + this.state.minutes + ':00'});
            }
-           this.timer = setTimeout(this.updateSomething.bind(this), 1000);
+           this.timer = setTimeout(() => {
+               console.log('keep counting');
+               this.props.startTimer(this.props.timer.time);
+            }, 1000);
         }
 
     pauseTimer() {
@@ -74,7 +75,11 @@ export class Timer extends Component {
     }
 
     startTimer() {
-        this.timer = setTimeout(this.updateSomething.bind(this), 1000);
+        // this.timer = setTimeout(this.updateSomething.bind(this), 1000);
+        // this.timer = setTimeout(this.props.startTimer(this.props.time), 1000);
+        this.timer = setTimeout(() => {
+            this.props.startTimer(this.props.timer.time);
+        }, 1000);
     }
 
     handleStartStop() {
@@ -83,7 +88,6 @@ export class Timer extends Component {
                 this.pauseTimer();
             }
             else {
-                console.log('not running')
                 this.startTimer();
             }
         }
@@ -98,6 +102,7 @@ export class Timer extends Component {
     }
 
     render() {
+        console.log(this.props.timer.time);
         let timerText = 'next';
         if (this.state.enableStart) {
             if (this.state.running) {

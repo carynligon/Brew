@@ -18,7 +18,6 @@ export class Home extends React.Component {
     this.logout = this.logout.bind(this);
     AsyncStorage.getItem('token').then((data) => {
       if (data) {
-        console.log(data)
         this.setState({token: data});
       }
     });
@@ -29,7 +28,6 @@ export class Home extends React.Component {
       headers: {...settings, "user-token": this.state.token}
     })
     .then((response) => {
-      console.log(response);
       if (response.status === 200) {
         AsyncStorage.removeItem('token');
         this.props.toggleNavBar();
@@ -45,7 +43,7 @@ export class Home extends React.Component {
     .catch((error) => {console.error("login error: " + error)});
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <Timer {...this.props} />

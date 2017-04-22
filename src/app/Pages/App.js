@@ -23,7 +23,6 @@ class Main extends Component {
     this.state = {};
     AsyncStorage.getItem('token').then((data) => {
       if (data) {
-        console.log(data)
         this.setState({loggedIn: 'yes'});
       }
       else {
@@ -44,7 +43,6 @@ class Main extends Component {
   }
 
   render() {
-    console.log('props', this.props);
     let inputStyle = styles.textBox;
     let errorMessage;
     let stuff;
@@ -72,9 +70,7 @@ import { connect } from 'react-redux';
 import * as ActionCreators from '../Actions/index';
 
 function mapStateToProps(state) {
-    return {
-        time: 0
-    }
+    return state;
 }
 
 function mapDispatchToProps(dispatch) {
