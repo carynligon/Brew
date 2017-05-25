@@ -63,9 +63,10 @@ export class Timer extends Component {
               this.setState({minutes: this.state.minutes + 1, seconds: 0});
               this.setState({timerText: '0' + this.state.minutes + ':00'});
            }
+           console.log('update something')
+           this.props.startTimer(this.props.timer.time);
            this.timer = setTimeout(() => {
-               console.log('keep counting');
-               this.props.startTimer(this.props.timer.time);
+               this.updateSomething();
             }, 1000);
         }
 
@@ -75,11 +76,7 @@ export class Timer extends Component {
     }
 
     startTimer() {
-        // this.timer = setTimeout(this.updateSomething.bind(this), 1000);
-        // this.timer = setTimeout(this.props.startTimer(this.props.time), 1000);
-        this.timer = setTimeout(() => {
-            this.props.startTimer(this.props.timer.time);
-        }, 1000);
+        this.timer = setTimeout(this.updateSomething.bind(this), 1000);
     }
 
     handleStartStop() {
@@ -102,7 +99,7 @@ export class Timer extends Component {
     }
 
     render() {
-        console.log(this.props.timer.time);
+        console.log('timer time', this.props.timer.time);
         let timerText = 'next';
         if (this.state.enableStart) {
             if (this.state.running) {
