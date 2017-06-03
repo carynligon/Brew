@@ -15,6 +15,7 @@
   "devDependencies": {
     "mixin": "^0.2.0",
     "react-mixin": "^3.0.5",
-    "react-timer": "^1.0.2"
+    "react-timer": "^1.0.2",
+    "underscore": "^1.8.3"
   }
 }

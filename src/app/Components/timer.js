@@ -95,7 +95,6 @@ export class Timer extends Component {
     }
 
     render() {
-        console.log('timer time', this.props.timer.time);
         let timerText = 'next';
         if (this.state.enableStart) {
             if (this.state.running) {
