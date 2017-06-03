@@ -1,29 +1,20 @@
 {
   "name": "Brew",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
   "private": true,
-  "scripts": {
-    "watch-styles": "sass --watch ./src/app/SCSS/main.scss:./dist/styles.css",
-    "css-js": "react-native-css -i ./dist/styles.css -o ./dist/styles.js --watch --pretty"
-  },
+  "main": "main.js",
   "dependencies": {
-    "react": "15.4.1",
-    "react-mixin": "^2.0.2",
-    "react-native": "0.38.0",
-    "react-timer-mixin": "^0.13.3",
+    "expo": "17.0.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
+    "react-redux": "^5.0.5",
     "redux": "^3.6.0"
   },
-  "jest": {
-    "preset": "react-native"
-  },
   "devDependencies": {
-    "babel-jest": "17.0.2",
-    "babel-preset-react-native": "1.9.0",
-    "jest": "17.0.3",
-    "react-native-css": "^1.2.45",
-    "react-redux": "^5.0.3",
-    "react-test-renderer": "15.4.1",
-    "remote-redux-devtools": "^0.5.5",
-    "remote-redux-devtools-on-debugger": "^0.7.0"
+    "mixin": "^0.2.0",
+    "react-mixin": "^3.0.5",
+    "react-timer": "^1.0.2"
   }
 }
