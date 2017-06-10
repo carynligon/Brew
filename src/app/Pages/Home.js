@@ -43,7 +43,6 @@ export class Home extends React.Component {
     .catch((error) => {console.error("login error: " + error)});
   }
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <Timer {...this.props} />
