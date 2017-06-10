@@ -26,7 +26,7 @@ export class Timer extends Component {
             timerTextMins: '00',
             timerTextSecs: '00',
             timerText: '00:00',
-            method: 'chemex',
+            method: 'aeropress',
             startTimer: false
         }
         this.state = this.initialState;

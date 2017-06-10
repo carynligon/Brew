@@ -35,4 +35,50 @@
             }
         ]
     },
+    "aeropress": {
+        "name": "aeropress",
+        "coffeeWeight": "41",
+        "waterWeight": "700",
+        "time": "40",
+        "nonTimedSteps": [
+            {
+                "order": 1,
+                "title": "Prep & Preheat",
+                "directions": "Fill your kettle with filtered water and bring it up to right before a boil. While you wait, grab your Aeropress, coffee, scale, filter, and a spoon or Aeropress paddle"
+            },
+            {
+                "order": 2,
+                "title": "Measure & Grind",
+                "directions": "Use a scale to weight out about 17 grams of coffee and grind to a similar size of table salt. (#18 on a Baratza Encore)"
+            },
+            {
+                "order": 3,
+                "title": "Prep the Aeropress",
+                "directions": "Place the filter in the basket and use the hot water from your kettle to rinse the filter."
+            },
+            {
+                "order": 4,
+                "title": "Add Coffee",
+                "directions": "Discard the rinse water from your mug. Affix the basket to the bottom of the brew chamber and place it on top of the mug. Add the coffee."
+            }
+        ],
+        "timedSteps": [
+            {
+                "order": 1,
+                "time": { "start": 0, "stop": 10},
+                "title": "Add Water",
+                "directions": "Saturate all the grounds within 10 seconds. Pour 220g of water. Spin the chamber, making sure all the coffee is saturated."
+            }, {
+                "order": 2,
+                "time": { "start": 10, "stop": 20},
+                "title": "Place the Plunger",
+                "directions": "Place the plunger on the brew chamber and pull up slightly to create a pressure seal. Don’t plunge yet!"
+            }, {
+                "order": 3,
+                "time": { "start": 20, "stop": 40},
+                "title": "Stir and Plunge",
+                "directions": "Give the slurry another stir with a spoon or paddle. Put the plunger back on and gently press down with steady pressure, stopping as soon as you hear a hissing sound."
+            }
+        ]
+    }
 }
