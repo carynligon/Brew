@@ -27,13 +27,15 @@ export class Timer extends Component {
             timerTextSecs: '00',
             timerText: '00:00',
             method: 'aeropress',
-            startTimer: false
+            startTimer: false,
+            finishedTimer: false,
         }
         this.state = this.initialState;
         this.timer;
         this.enableStart = this.enableStart.bind(this);
         this.nextStep = this.nextStep.bind(this);
         this.startTimer = this.startTimer.bind(this);
+        this.stopTimer = this.stopTimer.bind(this);
         this.pauseTimer = this.pauseTimer.bind(this);
     }
 
@@ -79,6 +81,11 @@ export class Timer extends Component {
         });
     }
 
+    stopTimer() {
+        clearTimeout(this.timer);
+        this.setState({ finishedTimer: true });
+    }
+
     handleStartStop() {
         if (this.state.enableStart) {
             if (this.state.running) {
@@ -112,7 +119,7 @@ export class Timer extends Component {
         return (
             <View style={styles.container}>
                 <Header />
-                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} startTimer={this.state.startTimer} />
+                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} startTimer={this.state.startTimer} stopTimer={this.stopTimer} finishedTimer={this.state.finishedTimer} />
                 <Text style={styles.timerText}>
                     {this.state.timerText}
                 </Text>
