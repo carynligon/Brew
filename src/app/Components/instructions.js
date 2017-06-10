@@ -17,7 +17,7 @@ export default class Instructions extends Component {
             return {time: step.time.stop, completed: false};
         });
         this.state = {
-            currentStep: null,
+            currentStep: methods[method].timedSteps[0],
             changeTimes,
         };
     }
@@ -25,6 +25,7 @@ export default class Instructions extends Component {
         console.log('next props', nextProps)
         const { method } = nextProps;
         const { changeTimes } = this.state;
+        const { timedSteps, nonTimedSteps } = methods[method];
         const currentChangeTime = _.findLastIndex(changeTimes, {completed: true});
         console.log('current change time', currentChangeTime);
         const index = currentChangeTime + 1;
@@ -32,15 +33,17 @@ export default class Instructions extends Component {
         if (methods[method].timedSteps[index].time.stop === this.props.time) {
             let newChangeTimes = changeTimes;
             newChangeTimes[index].completed = true;
-            this.setState({ changeTimes: newChangeTimes });
+            const currentStep = methods[method].timedSteps[index + 1] || null;
+            this.setState({ changeTimes: newChangeTimes, currentStep });
         }
     }
     render() {
         const { method } = this.props;
+        const { currentStep } = this.state;
         let instruction = '';
         let instructionTitle = methods[method].timedSteps[0].title;
-        let upNext = methods[method].timedSteps[1].directions;
-        console.log(this.state)
+        console.log('state of instructions', this.state)
+
         
         // if (this.props.time) {
         //     if (this.props.time <= changeTimes[0]) {
@@ -65,10 +68,10 @@ export default class Instructions extends Component {
         return (
             <View style={styles.instructionsContainer}>
                 <Text style={styles.instructionsTitle}>
-                    {instructionTitle}
+                    {currentStep.title}
                 </Text>
                 <Text style={styles.instructionsText}>
-                    {instruction}
+                    {currentStep.directions}
                 </Text>
             </View>
             );

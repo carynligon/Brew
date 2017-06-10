@@ -1,4 +1,4 @@
-export default methods = {
+{
     "chemex": {
         "name": "chemex",
         "coffeeWeight": "41",
