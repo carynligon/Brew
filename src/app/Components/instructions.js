@@ -4,7 +4,7 @@ import {
     View
 } from 'react-native';
 import _ from 'underscore';
-import chemexObj from '../Config/Methods/chemex';
+import methods from '../Fixtures/methods';
 
 import styles from '../Styles/components/timer';
 
@@ -12,7 +12,8 @@ import styles from '../Styles/components/timer';
 export default class Instructions extends Component {
     constructor(props) {
         super(props);
-        const changeTimes = chemexObj.timedSteps.map((step) => {
+        const { method } = this.props;
+        const changeTimes = methods[method].timedSteps.map((step) => {
             return {time: step.time.stop, completed: false};
         });
         this.state = {
@@ -22,21 +23,23 @@ export default class Instructions extends Component {
     }
     componentWillReceiveProps(nextProps) {
         console.log('next props', nextProps)
+        const { method } = nextProps;
         const { changeTimes } = this.state;
         const currentChangeTime = _.findLastIndex(changeTimes, {completed: true});
         console.log('current change time', currentChangeTime);
         const index = currentChangeTime + 1;
         console.log('index', index)
-        if (chemexObj.timedSteps[index].time.stop === this.props.time) {
+        if (methods[method].timedSteps[index].time.stop === this.props.time) {
             let newChangeTimes = changeTimes;
             newChangeTimes[index].completed = true;
             this.setState({ changeTimes: newChangeTimes });
         }
     }
     render() {
+        const { method } = this.props;
         let instruction = '';
-        let instructionTitle = chemexObj.timedSteps[0].title;
-        let upNext = chemexObj.timedSteps[1].directions;
+        let instructionTitle = methods[method].timedSteps[0].title;
+        let upNext = methods[method].timedSteps[1].directions;
         console.log(this.state)
         
         // if (this.props.time) {

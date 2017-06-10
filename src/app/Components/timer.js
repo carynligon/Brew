@@ -10,7 +10,7 @@ import Header from './header';
 import Instructions from './instructions';
 import ProgressBar from './progress_bar';
 
-import chemexObj from '../Config/Methods/chemex';
+import methods from '../Fixtures/methods';
 
 import styles from '../Styles/components/timer';
 
@@ -26,6 +26,7 @@ export class Timer extends Component {
             timerTextMins: '00',
             timerTextSecs: '00',
             timerText: '00:00',
+            method: 'chemex'
         }
         this.state = this.initialState;
         this.timer;
@@ -40,7 +41,7 @@ export class Timer extends Component {
     }
 
     nextStep() {
-        if (chemexObj.nonTimedSteps.length - 1 === this.state.instruction) {
+        if (methods[this.state.method].nonTimedSteps.length - 1 === this.state.instruction) {
             this.enableStart();
         }
         else {
@@ -108,7 +109,7 @@ export class Timer extends Component {
         return (
             <View style={styles.container}>
                 <Header />
-                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} enableStart={this.enableStart} />
+                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} enableStart={this.enableStart} />
                 <Text style={styles.timerText}>
                     {this.state.timerText}
                 </Text>
