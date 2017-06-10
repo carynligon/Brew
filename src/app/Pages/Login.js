@@ -85,7 +85,6 @@ export class Login extends Component {
     .catch((error) => {console.error("login error: " + error)});
   }
   render() {
-    console.log(this.state)
     let inputStyle = styles.textBox;
     let errorMessage;
     if (this.state.error) {

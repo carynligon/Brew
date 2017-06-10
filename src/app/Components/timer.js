@@ -26,7 +26,8 @@ export class Timer extends Component {
             timerTextMins: '00',
             timerTextSecs: '00',
             timerText: '00:00',
-            method: 'chemex'
+            method: 'aeropress',
+            startTimer: false
         }
         this.state = this.initialState;
         this.timer;
@@ -73,7 +74,9 @@ export class Timer extends Component {
     }
 
     startTimer() {
-        this.timer = setInterval(this.updateSomething.bind(this), 1000);
+        this.setState({ startTimer: true }, () => {
+            this.timer = setInterval(this.updateSomething.bind(this), 1000);
+        });
     }
 
     handleStartStop() {
@@ -109,7 +112,7 @@ export class Timer extends Component {
         return (
             <View style={styles.container}>
                 <Header />
-                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} enableStart={this.enableStart} />
+                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} startTimer={this.state.startTimer} />
                 <Text style={styles.timerText}>
                     {this.state.timerText}
                 </Text>
