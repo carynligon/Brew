@@ -22,7 +22,6 @@ export class Login extends Component {
     this.state = {};
     AsyncStorage.getItem('token').then((data) => {
       if (data) {
-        console.log(data)
         this.setState({loggedIn: 'yes'});
       }
       else {
@@ -60,7 +59,6 @@ export class Login extends Component {
         store.dispatch(stopLoad());
       if (response.status === 200) {
         response.json().then((data) => {
-            console.log(data)
           AsyncStorage.multiSet([
             ['token', data["user-token"]],
             ['id', data["objectId"]]

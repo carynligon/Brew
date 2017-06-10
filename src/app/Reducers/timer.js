@@ -8,10 +8,8 @@ const timerState = (state = [], action) => {
                 time: time + 1
             };
         case('STOP_TIMER'):
-            console.log('default', state);
             return state;
         default:
-            console.log('default', state);
             return state;
     }
 }

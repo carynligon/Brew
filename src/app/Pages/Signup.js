@@ -102,7 +102,6 @@ export class Signup extends Component {
   }
 
   render() {
-    console.log(this.state);
     let inputStyle = styles.textBox;
     let errorMsg;
     if (this.state.error) {

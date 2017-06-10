@@ -10,7 +10,7 @@ import Header from './header';
 import Instructions from './instructions';
 import ProgressBar from './progress_bar';
 
-import chemexObj from '../Config/Methods/chemex';
+import methods from '../Fixtures/methods';
 
 import styles from '../Styles/components/timer';
 
@@ -26,6 +26,7 @@ export class Timer extends Component {
             timerTextMins: '00',
             timerTextSecs: '00',
             timerText: '00:00',
+            method: 'chemex'
         }
         this.state = this.initialState;
         this.timer;
@@ -40,7 +41,7 @@ export class Timer extends Component {
     }
 
     nextStep() {
-        if (chemexObj.nonTimedSteps.length - 1 === this.state.instruction) {
+        if (methods[this.state.method].nonTimedSteps.length - 1 === this.state.instruction) {
             this.enableStart();
         }
         else {
@@ -63,11 +64,7 @@ export class Timer extends Component {
               this.setState({minutes: this.state.minutes + 1, seconds: 0});
               this.setState({timerText: '0' + this.state.minutes + ':00'});
            }
-           console.log('update something')
            this.props.startTimer(this.props.timer.time);
-           this.timer = setTimeout(() => {
-               this.updateSomething();
-            }, 1000);
         }
 
     pauseTimer() {
@@ -76,7 +73,7 @@ export class Timer extends Component {
     }
 
     startTimer() {
-        this.timer = setTimeout(this.updateSomething.bind(this), 1000);
+        this.timer = setInterval(this.updateSomething.bind(this), 1000);
     }
 
     handleStartStop() {
@@ -99,7 +96,6 @@ export class Timer extends Component {
     }
 
     render() {
-        console.log('timer time', this.props.timer.time);
         let timerText = 'next';
         if (this.state.enableStart) {
             if (this.state.running) {
@@ -113,7 +109,7 @@ export class Timer extends Component {
         return (
             <View style={styles.container}>
                 <Header />
-                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} enableStart={this.enableStart} />
+                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} enableStart={this.enableStart} />
                 <Text style={styles.timerText}>
                     {this.state.timerText}
                 </Text>
