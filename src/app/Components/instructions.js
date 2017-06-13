@@ -35,12 +35,22 @@ export default class Instructions extends Component {
         else {
             // if the current step doesn't have a time key, that means
             // they just started the timer, so show first timed step
-            if (!this.state.currentStep.time) {
+            if (nextProps.finishedTimer) {
+                const currentStep = {
+                    title: 'Enjoy!',
+                    directions: '',
+                };
+                this.setState({ currentStep });
+            }
+            else if (this.state.currentStep && !this.state.currentStep.time) {
                 this.setState({ currentStep: timedSteps[0] });
+            }
+            else if (!this.state.currentStep) {
+                this.props.stopTimer();
             }
             // otherwise follow the time and show the next 
             // incomplete step
-            if (timedSteps[index].time.stop === this.props.time) {
+            else if (timedSteps[index].time.stop === this.props.time + 1) {
                 let newChangeTimes = changeTimes;
                 newChangeTimes[index].completed = true;
                 const currentStep = timedSteps[index + 1] || null;
@@ -57,10 +67,10 @@ export default class Instructions extends Component {
         return (
             <View style={styles.instructionsContainer}>
                 <Text style={styles.instructionsTitle}>
-                    {currentStep.title}
+                    {currentStep ? currentStep.title : "Enjoy!"}
                 </Text>
                 <Text style={styles.instructionsText}>
-                    {currentStep.directions}
+                    {currentStep && currentStep.directions}
                 </Text>
             </View>
             );

@@ -25,15 +25,17 @@ export class Timer extends Component {
             seconds: 0,
             timerTextMins: '00',
             timerTextSecs: '00',
-            timerText: '00:00',
+            textTime: '00:00',
             method: 'aeropress',
-            startTimer: false
+            startTimer: false,
+            finishedTimer: false,
         }
         this.state = this.initialState;
         this.timer;
         this.enableStart = this.enableStart.bind(this);
         this.nextStep = this.nextStep.bind(this);
         this.startTimer = this.startTimer.bind(this);
+        this.stopTimer = this.stopTimer.bind(this);
         this.pauseTimer = this.pauseTimer.bind(this);
     }
 
@@ -51,19 +53,20 @@ export class Timer extends Component {
     }
 
     updateSomething() {
+        const { method, totalSeconds: time } = this.state;
         this.setState({totalSeconds: (this.state.minutes * 60 + this.state.seconds), running: true});
         if (this.state.seconds < 59) {
             this.setState({seconds: this.state.seconds + 1})
             if (this.state.seconds <= 9 && this.state.minutes <= 9) {
-               this.setState({timerText: '0' + this.state.minutes + ':' + '0' + this.state.seconds})
+               this.setState({textTime: '0' + this.state.minutes + ':' + '0' + this.state.seconds})
              } else if (this.state.seconds >= 10 && this.state.minutes <= 9) {
-               this.setState({timerText: '0' + this.state.minutes + ':' + this.state.seconds})
+               this.setState({textTime: '0' + this.state.minutes + ':' + this.state.seconds})
              } else {
-               this.setState({timerText: this.state.minutes + ':' + this.state.seconds})
+               this.setState({textTime: this.state.minutes + ':' + this.state.seconds})
              }
             } else {
               this.setState({minutes: this.state.minutes + 1, seconds: 0});
-              this.setState({timerText: '0' + this.state.minutes + ':00'});
+              this.setState({textTime: '0' + this.state.minutes + ':00'});
            }
            this.props.startTimer(this.props.timer.time);
         }
@@ -77,6 +80,14 @@ export class Timer extends Component {
         this.setState({ startTimer: true }, () => {
             this.timer = setInterval(this.updateSomething.bind(this), 1000);
         });
+    }
+
+    stopTimer() {
+        clearTimeout(this.timer);
+        this.setState({ 
+            finishedTimer: true, 
+            running: false, 
+            disabled: true });
     }
 
     handleStartStop() {
@@ -99,33 +110,30 @@ export class Timer extends Component {
     }
 
     render() {
+        const { enableStart, running, disabled, totalSeconds,
+            instruction, startTimer, resetTimer, method, stopTimer,
+            finishedTimer, textTime } = this.state;
         let timerText = 'next';
-        if (this.state.enableStart) {
-            if (this.state.running) {
-                timerText = 'pause';
-            }
-            else {
-                timerText = 'start';
-            }
+        if (enableStart) {
+            timerText = running ? 'pause' : 'start';
         }
-
         return (
             <View style={styles.container}>
                 <Header />
-                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} startTimer={this.state.startTimer} />
+                <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
                 <Text style={styles.timerText}>
-                    {this.state.timerText}
+                    {textTime}
                 </Text>
-                <ProgressBar time={this.state.totalSeconds} />
-                <TouchableOpacity
+                <ProgressBar time={totalSeconds} />
+                {!disabled && <TouchableOpacity
                     style={styles.startBtn}
                     onPress={this.handleStartStop.bind(this)}>
                   <Text style={styles.startText}>{timerText}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </TouchableOpacity>}
+                {!disabled && <TouchableOpacity
                     onPress={this.resetTimer.bind(this)}>
                   <Text style={styles.resetBtn}>Reset</Text>
-                </TouchableOpacity>
+                </TouchableOpacity>}
             </View>
             );
     }

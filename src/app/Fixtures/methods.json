@@ -1,9 +1,9 @@
 {
     "chemex": {
         "name": "chemex",
-        "coffeeWeight": "41",
-        "waterWeight": "700",
-        "time": "40",
+        "coffeeWeight": 41,
+        "waterWeight": 700,
+        "time": 40,
         "nonTimedSteps": [
             {
                 "order": 1,
@@ -37,9 +37,9 @@
     },
     "aeropress": {
         "name": "aeropress",
-        "coffeeWeight": "41",
-        "waterWeight": "700",
-        "time": "40",
+        "coffeeWeight": 41,
+        "waterWeight": 700,
+        "time": 40,
         "nonTimedSteps": [
             {
                 "order": 1,
