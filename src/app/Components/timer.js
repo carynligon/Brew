@@ -53,6 +53,7 @@ export class Timer extends Component {
     }
 
     updateSomething() {
+        const { method, totalSeconds: time } = this.state;
         this.setState({totalSeconds: (this.state.minutes * 60 + this.state.seconds), running: true});
         if (this.state.seconds < 59) {
             this.setState({seconds: this.state.seconds + 1})
@@ -83,7 +84,7 @@ export class Timer extends Component {
 
     stopTimer() {
         clearTimeout(this.timer);
-        this.setState({ finishedTimer: true });
+        this.setState({ finishedTimer: true, running: false });
     }
 
     handleStartStop() {
