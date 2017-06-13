@@ -25,7 +25,7 @@ export class Timer extends Component {
             seconds: 0,
             timerTextMins: '00',
             timerTextSecs: '00',
-            timerText: '00:00',
+            textTime: '00:00',
             method: 'aeropress',
             startTimer: false,
             finishedTimer: false,
@@ -58,15 +58,15 @@ export class Timer extends Component {
         if (this.state.seconds < 59) {
             this.setState({seconds: this.state.seconds + 1})
             if (this.state.seconds <= 9 && this.state.minutes <= 9) {
-               this.setState({timerText: '0' + this.state.minutes + ':' + '0' + this.state.seconds})
+               this.setState({textTime: '0' + this.state.minutes + ':' + '0' + this.state.seconds})
              } else if (this.state.seconds >= 10 && this.state.minutes <= 9) {
-               this.setState({timerText: '0' + this.state.minutes + ':' + this.state.seconds})
+               this.setState({textTime: '0' + this.state.minutes + ':' + this.state.seconds})
              } else {
-               this.setState({timerText: this.state.minutes + ':' + this.state.seconds})
+               this.setState({textTime: this.state.minutes + ':' + this.state.seconds})
              }
             } else {
               this.setState({minutes: this.state.minutes + 1, seconds: 0});
-              this.setState({timerText: '0' + this.state.minutes + ':00'});
+              this.setState({textTime: '0' + this.state.minutes + ':00'});
            }
            this.props.startTimer(this.props.timer.time);
         }
@@ -110,7 +110,9 @@ export class Timer extends Component {
     }
 
     render() {
-        const { enableStart, running, disabled } = this.state;
+        const { enableStart, running, disabled, totalSeconds,
+            instruction, startTimer, resetTimer, method, stopTimer,
+            finishedTimer, textTime } = this.state;
         let timerText = 'next';
         if (enableStart) {
             timerText = running ? 'pause' : 'start';
@@ -118,11 +120,11 @@ export class Timer extends Component {
         return (
             <View style={styles.container}>
                 <Header />
-                <Instructions time={this.state.totalSeconds} resetTimer={this.resetTimer} instruction={this.state.instruction} method={this.state.method} startTimer={this.state.startTimer} stopTimer={this.stopTimer} finishedTimer={this.state.finishedTimer} />
+                <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
                 <Text style={styles.timerText}>
-                    {this.state.timerText}
+                    {textTime}
                 </Text>
-                <ProgressBar time={this.state.totalSeconds} />
+                <ProgressBar time={totalSeconds} />
                 {!disabled && <TouchableOpacity
                     style={styles.startBtn}
                     onPress={this.handleStartStop.bind(this)}>
