@@ -84,7 +84,10 @@ export class Timer extends Component {
 
     stopTimer() {
         clearTimeout(this.timer);
-        this.setState({ finishedTimer: true, running: false });
+        this.setState({ 
+            finishedTimer: true, 
+            running: false, 
+            disabled: true });
     }
 
     handleStartStop() {
@@ -107,16 +110,11 @@ export class Timer extends Component {
     }
 
     render() {
+        const { enableStart, running, disabled } = this.state;
         let timerText = 'next';
-        if (this.state.enableStart) {
-            if (this.state.running) {
-                timerText = 'pause';
-            }
-            else {
-                timerText = 'start';
-            }
+        if (enableStart) {
+            timerText = running ? 'pause' : 'start';
         }
-
         return (
             <View style={styles.container}>
                 <Header />
@@ -125,15 +123,15 @@ export class Timer extends Component {
                     {this.state.timerText}
                 </Text>
                 <ProgressBar time={this.state.totalSeconds} />
-                <TouchableOpacity
+                {!disabled && <TouchableOpacity
                     style={styles.startBtn}
                     onPress={this.handleStartStop.bind(this)}>
                   <Text style={styles.startText}>{timerText}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </TouchableOpacity>}
+                {!disabled && <TouchableOpacity
                     onPress={this.resetTimer.bind(this)}>
                   <Text style={styles.resetBtn}>Reset</Text>
-                </TouchableOpacity>
+                </TouchableOpacity>}
             </View>
             );
     }
