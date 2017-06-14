@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     header: {
         alignSelf: 'stretch',
-        backgroundColor: 'blue',
+        backgroundColor: '#2B2626',
     },
     details: {
         color: '#fff',

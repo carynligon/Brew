@@ -28,19 +28,24 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     resetBtn: {
-        textDecorationLine: 'underline'
+        color: '#FF3734',
+        fontSize: 16,
+        marginBottom: 10
     },
     startBtn: {
-        backgroundColor: 'gray',
+        backgroundColor: '#FF3734',
         borderRadius: 3,
         marginTop: 10,
-        padding: 5,
-        width: 100
+        padding: 20,
+        width: 120
     },
     startText: {
+        color: '#FFF',
+        fontSize: 16,
         textAlign: 'center'
     },
     timerText: {
+        color: '#D1D1D1',
         fontSize: 70,
         marginBottom: 20,
     }
