@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import globals from '../globals/variables';
 
 export default StyleSheet.create({
     container: {
@@ -10,43 +11,47 @@ export default StyleSheet.create({
     instructionsContainer: {
         alignSelf: 'stretch',
         marginTop: 20,
-        paddingRight: 20,
-        paddingLeft: 20,
+        paddingRight: 30,
+        paddingLeft: 30,
     },
     instructionsText: {
-        fontSize: 16,
-        textAlign: 'center',
+        fontSize: 18,
+        lineHeight: 22,
+        textAlign: 'left',
     },
     instructionsTitle: {
-        fontSize: 20,
+        fontSize: 30,
         marginBottom: 10,
-        textAlign: 'center'
+        textAlign: 'left'
     },
     nextStep: {
-        fontSize: 12,
+        fontSize: 16,
         marginBottom: 20,
         textAlign: 'center',
     },
     resetBtn: {
-        color: '#FF3734',
+        color: globals.primary,
         fontSize: 16,
         marginBottom: 10
     },
     startBtn: {
-        backgroundColor: '#FF3734',
+        backgroundColor: globals.primary,
         borderRadius: 3,
         marginTop: 10,
         padding: 20,
         width: 120
     },
     startText: {
-        color: '#FFF',
+        color: globals.white,
         fontSize: 16,
         textAlign: 'center'
     },
+    stepIndicator: {
+        fontSize: 14,
+    },
     timerText: {
-        color: '#D1D1D1',
-        fontSize: 70,
+        color: globals.gray_20,
+        fontSize: 76,
         marginBottom: 20,
     }
 });
