@@ -73,7 +73,6 @@ export default class Instructions extends Component {
         if (!nextStep || !nextStep.time) {
             nextStepTimeText = null;
         }
-        console.log('next step time', nextStepTime)
         let instruction = '';
         let instructionTitle = methods[method].timedSteps[0].title;
 
@@ -86,7 +85,7 @@ export default class Instructions extends Component {
                     {currentStep && currentStep.directions}
                 </Text>
                 <Text style={styles.nextStep}>
-                    {nextStep && `Next: ${nextStep.title}`}
+                    {nextStep && `Next: ${nextStep.title} `}
                     {nextStepTimeText}
                 </Text>
             </View>

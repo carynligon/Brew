@@ -26,8 +26,9 @@ export default StyleSheet.create({
     },
     nextStep: {
         fontSize: 16,
+        marginTop: 20,
         marginBottom: 20,
-        textAlign: 'center',
+        textAlign: 'left',
     },
     resetBtn: {
         color: globals.primary,
