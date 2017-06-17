@@ -120,11 +120,11 @@ export class Timer extends Component {
         return (
             <View style={styles.container}>
                 <Header />
+                <ProgressBar time={totalSeconds} />
                 <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
                 <Text style={styles.timerText}>
                     {textTime}
                 </Text>
-                <ProgressBar time={totalSeconds} />
                 {!disabled && <TouchableOpacity
                     style={styles.startBtn}
                     onPress={this.handleStartStop.bind(this)}>
