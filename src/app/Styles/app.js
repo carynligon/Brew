@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import globals from './globals/variables';
 
 export default StyleSheet.create({
   button: {
@@ -12,7 +13,7 @@ export default StyleSheet.create({
     alignItems: 'stretch',
   },
   error: {
-    backgroundColor: '#FFF',
+    backgroundColor: globals.white,
     borderColor: 'red',
     borderStyle: 'solid',
     borderWidth: 2,
@@ -26,7 +27,7 @@ export default StyleSheet.create({
     marginBottom: 10
   },
   textBox: {
-    backgroundColor: '#FFF',
+    backgroundColor: globals.white,
     height: 30,
     margin: 15,
     padding: 5,

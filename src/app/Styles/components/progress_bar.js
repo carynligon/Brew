@@ -1,14 +1,17 @@
 import { StyleSheet } from 'react-native';
+import globals from '../globals/variables';
 
 export default StyleSheet.create({
     bar: {
-        backgroundColor: 'green',
+        backgroundColor: globals.secondary,
         height: 10,
-        width: 50
+        width: 100
     },
     container: {
-        backgroundColor: 'gray',
+        backgroundColor: globals.yellow_lt,
         height: 10,
-        width: 275
+        position: 'absolute',
+        top: 185,
+        width: 375
     }
 });
