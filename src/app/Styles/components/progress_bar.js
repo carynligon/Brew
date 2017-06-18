@@ -10,8 +10,6 @@ export default StyleSheet.create({
     container: {
         backgroundColor: globals.yellow_lt,
         height: 10,
-        position: 'relative',
-        bottom: 20,
         width: 375
     }
 });
