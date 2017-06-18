@@ -30,7 +30,10 @@ export default class Instructions extends Component {
         // show non timed steps instruction since timer 
         // hasn't started yet
         if (!nextProps.startTimer) {
-            this.setState({ currentStep: nonTimedSteps[instruction]})
+            this.setState({ 
+                currentStep: nonTimedSteps[instruction],
+                nextStep: nonTimedSteps[instruction + 1] || timedSteps[0],
+            });
         } 
         else {
             // if the current step doesn't have a time key, that means
@@ -43,7 +46,10 @@ export default class Instructions extends Component {
                 this.setState({ currentStep });
             }
             else if (this.state.currentStep && !this.state.currentStep.time) {
-                this.setState({ currentStep: timedSteps[0] });
+                this.setState({ 
+                    currentStep: timedSteps[0],
+                    nextStep: timedSteps[1],
+                });
             }
             else if (!this.state.currentStep) {
                 this.props.stopTimer();
@@ -54,13 +60,19 @@ export default class Instructions extends Component {
                 let newChangeTimes = changeTimes;
                 newChangeTimes[index].completed = true;
                 const currentStep = timedSteps[index + 1] || null;
-                this.setState({ changeTimes: newChangeTimes, currentStep });
+                const nextStep = timedSteps[index + 2] || null;
+                this.setState({ changeTimes: newChangeTimes, currentStep, nextStep });
             }
         }
     }
     render() {
         const { method } = this.props;
-        const { currentStep } = this.state;
+        const { currentStep, nextStep } = this.state;
+        let nextStepTime = nextStep && currentStep.time ? currentStep.time.stop : '00';
+        let nextStepTimeText = `(00:${nextStepTime})`;
+        if (!nextStep || !nextStep.time) {
+            nextStepTimeText = null;
+        }
         let instruction = '';
         let instructionTitle = methods[method].timedSteps[0].title;
 
@@ -71,6 +83,10 @@ export default class Instructions extends Component {
                 </Text>
                 <Text style={styles.instructionsText}>
                     {currentStep && currentStep.directions}
+                </Text>
+                <Text style={styles.nextStep}>
+                    {nextStep && `Next: ${nextStep.title} `}
+                    {nextStepTimeText}
                 </Text>
             </View>
             );
