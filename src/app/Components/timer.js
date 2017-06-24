@@ -8,7 +8,6 @@ import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 import Header from './header';
 import Instructions from './instructions';
-import ProgressBar from './progress_bar';
 
 import methods from '../Fixtures/methods';
 
@@ -119,7 +118,7 @@ export class Timer extends Component {
         }
         return (
             <View style={styles.container}>
-                <Header />
+                <Header time={totalSeconds} method={method} />
                 <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
                 <Text style={styles.timerText}>
                     {textTime}

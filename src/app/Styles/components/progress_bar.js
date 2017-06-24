@@ -5,7 +5,6 @@ export default StyleSheet.create({
     bar: {
         backgroundColor: globals.secondary,
         height: 10,
-        width: 100
     },
     container: {
         backgroundColor: globals.yellow_lt,
