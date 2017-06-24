@@ -14,7 +14,7 @@ export default class Header extends Component {
                 <Text style={styles.title}>Brew Guides</Text>
                 <Text style={styles.method}>Chemex</Text>
                 <Text style={styles.details}>Serves 2 | 4 minutes</Text>
-                <ProgressBar />
+                <ProgressBar {...this.props}/>
             </View>
             );
     }
