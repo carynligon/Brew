@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { firebaseConfig } from '../settings';
 import {
   AsyncStorage,
   NavigatorIOS,
@@ -16,6 +18,8 @@ import {loggedIn, startLoad, stopLoad} from '../Actions/index';
 import { Home } from './Home';
 import { Login } from './Login';
 import { Signup } from './Signup';
+
+let firebaseApp;
 
 class Main extends Component {
   constructor(props) {
@@ -42,6 +46,11 @@ class Main extends Component {
     });
   }
 
+  componentDidMount() {
+    firebaseApp = firebase.initializeApp(firebaseConfig);
+    console.log('firebase', firebaseApp)
+  }
+
   render() {
     let inputStyle = styles.textBox;
     let errorMessage;
@@ -59,7 +68,7 @@ class Main extends Component {
     }
     return (
       <View style={styles.container}>
-        <Home {...this.props} />
+        {stuff}
       </View>
     )
   }

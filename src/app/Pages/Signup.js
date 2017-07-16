@@ -11,6 +11,7 @@ import styles from '../Styles/signup';
 import settings from '../settings';
 import { Home } from './Home';
 import { Login } from './Login';
+import { createUser } from '../Actions/index';
 
 export class Signup extends Component {
   constructor() {
@@ -20,6 +21,10 @@ export class Signup extends Component {
       password: ''
     }
 
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
   }
 
   switchLogin() {
@@ -64,41 +69,10 @@ export class Signup extends Component {
   }
 
   handlePress() {
-    fetch('https://api.backendless.com/v1/users/register', {
-      method: 'POST',
-      headers: settings,
-      body: JSON.stringify({
-        name: this.state.name,
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-    .then((response) => {
-      if (response.status === 200) {
-        fetch('https://api.backendless.com/v1/users/login', {
-          method: 'POST',
-          headers: settings,
-          body: JSON.stringify({
-            login: this.state.email,
-            password: this.state.password
-          })
-        })
-        this.setState({
-          email: '',
-          password: '',
-        });
-        this.props.toggleNavBar();
-        this.props.navigator.push({
-          title: "Home Page",
-          component: Home,
-          passProps: {...this.props}
-        });
-      } else {
-        this.setState({error: true});
-      }
-    })
-    .catch((error) => {console.error(error)});
+    const { email, error, password } = this.state;
+    if (!error) {
+      createUser(email, password);
+    }
   }
 
   render() {

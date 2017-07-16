@@ -1,3 +1,16 @@
+import * as firebase from 'firebase';
+
+export const createUser = (email, pass) => {
+    try {
+        firebase.auth().createUserWithEmailAndPassword(email, pass).then((resp) => {
+            return { type: 'CREATE_USER_SUCCESS' };
+        })
+    }
+    catch (error) {
+        return { type: 'CREATE_USER_FAIL' };
+    }
+}
+
 export const startLoad = () => {
       return {
         type: 'START_LOAD'

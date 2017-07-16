@@ -56,6 +56,7 @@ export class Login extends Component {
       })
     })
     .then((response) => {
+        console.log(response)
         store.dispatch(stopLoad());
       if (response.status === 200) {
         response.json().then((data) => {

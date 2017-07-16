@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import auth from './auth';
+import { auth, createUser } from './auth';
 import load from './load';
 import timer from './timer';
 
 const rootReducer = combineReducers({
   auth,
+  createUser,
   load,
   timer
 });

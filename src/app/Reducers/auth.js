@@ -4,7 +4,7 @@ const initialState = {
     loggingOut: false
 }
 
-const auth = (state = initialState,action) => {
+export const auth = (state = initialState,action) => {
     switch(action.type) {
         case 'LOGGED_IN':
             return {...state, loggedIn: true}
@@ -18,3 +18,15 @@ const auth = (state = initialState,action) => {
 }
 
 export default auth;
+
+export const createUser = (state = {}, action) => {
+    switch(action.type) {
+        case 'CREATE_USER_SUCCESS':
+            console.log(action)
+            return { ...state }
+        case 'CREATE_USER_FAIL':
+            return { ...state}
+        default:
+            return state;
+    }
+}
