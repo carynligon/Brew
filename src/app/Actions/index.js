@@ -1,14 +1,30 @@
 import * as firebase from 'firebase';
+import { CREATE_USER_SUCCESS, CREATE_USER_FAIL, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from '../Constants/ActionTypes';
 
 export const createUser = (email, pass) => {
     try {
         firebase.auth().createUserWithEmailAndPassword(email, pass).then((resp) => {
-            return { type: 'CREATE_USER_SUCCESS' };
+            return { type: CREATE_USER_SUCCESS };
         })
     }
     catch (error) {
-        return { type: 'CREATE_USER_FAIL' };
+        return { type: CREATE_USER_FAIL };
     }
+}
+
+export const loginUser = (email, pass) => {
+    try {
+        firebase.auth().signInWithEmailAndPassword(email, pass).then((resp) => {
+            dispatchLogin();
+        })
+    }
+    catch (error) {
+        return { type: LOGIN_USER_FAIL };
+    }
+}
+
+export const dispatchLogin = () => {
+    return { type: LOGIN_USER_SUCCESS };
 }
 
 export const startLoad = () => {

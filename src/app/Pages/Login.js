@@ -15,6 +15,7 @@ import store from '../store';
 import {loggedIn, startLoad, stopLoad} from '../Actions/index';
 import { Home } from './Home';
 import { Signup } from './Signup';
+import { loginUser } from '../Actions/index';
 
 export class Login extends Component {
   constructor(props) {
@@ -46,44 +47,36 @@ export class Login extends Component {
     this.setState({password: text});
   }
   handlePress() {
-    store.dispatch(startLoad());
-    fetch('https://api.backendless.com/v1/users/login', {
-      method: 'POST',
-      headers: settings,
-      body: JSON.stringify({
-        login: this.state.email,
-        password: this.state.password
-      })
-    })
-    .then((response) => {
-        console.log(response)
-        store.dispatch(stopLoad());
-      if (response.status === 200) {
-        response.json().then((data) => {
-          AsyncStorage.multiSet([
-            ['token', data["user-token"]],
-            ['id', data["objectId"]]
-            ]);
-          this.setState({user: data});
-          this.setState({
-            email: '',
-            password: '',
-          });
-          this.props.toggleNavBar();
-          this.props.navigator.push({
-            title: "Home Page",
-            component: Home,
-            passProps: {
-              ...this.props,
-              user: this.state.user
-            }
-          });
-        })
-      } else {
-        this.setState({error: true});
-      }
-    })
-    .catch((error) => {console.error("login error: " + error)});
+    const { email, error, password } = this.state;
+    if (!error) {
+      loginUser(email, password);
+    }
+      // if (response.status === 200) {
+      //   response.json().then((data) => {
+      //     AsyncStorage.multiSet([
+      //       ['token', data["user-token"]],
+      //       ['id', data["objectId"]]
+      //       ]);
+      //     this.setState({user: data});
+      //     this.setState({
+      //       email: '',
+      //       password: '',
+      //     });
+      //     this.props.toggleNavBar();
+      //     this.props.navigator.push({
+      //       title: "Home Page",
+      //       component: Home,
+      //       passProps: {
+      //         ...this.props,
+      //         user: this.state.user
+      //       }
+      //     });
+      //   })
+      // } else {
+      //   this.setState({error: true});
+      // }
+    // })
+    // .catch((error) => {console.error("login error: " + error)});
   }
   render() {
     let inputStyle = styles.textBox;

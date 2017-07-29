@@ -10,6 +10,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as ActionCreators from '../Actions/index';
 
 import styles from '../Styles/app';
 import settings from '../settings';
@@ -48,35 +51,30 @@ class Main extends Component {
 
   componentDidMount() {
     firebaseApp = firebase.initializeApp(firebaseConfig);
-    console.log('firebase', firebaseApp)
   }
 
   render() {
     let inputStyle = styles.textBox;
     let errorMessage;
-    let stuff;
+    let start;
     if (this.state.error) {
       inputStyle = styles.error;
       errorMessage = "Invalid email or password"
     }
     if (this.state.loggedIn) {
       if (this.state.loggedIn === 'yes') {
-        stuff = <Home {...this.props} />
+        start = <Home {...this.props} />
       } else {
-        stuff = <Login {...this.props} />
+        start = <Login {...this.props} />
       }
     }
     return (
       <View style={styles.container}>
-        {stuff}
+        {start}
       </View>
     )
   }
 }
-
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as ActionCreators from '../Actions/index';
 
 function mapStateToProps(state) {
     return state;

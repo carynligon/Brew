@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   NavigatorIOS
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import styles from '../Styles/signup';
 import settings from '../settings';
@@ -21,10 +22,6 @@ export class Signup extends Component {
       password: ''
     }
 
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
   }
 
   switchLogin() {
@@ -73,6 +70,9 @@ export class Signup extends Component {
     if (!error) {
       createUser(email, password);
     }
+    setTimeout(() => {
+      console.log(this.props)
+    }, 5000)
   }
 
   render() {
@@ -122,3 +122,12 @@ export class Signup extends Component {
     )
   }
 }
+
+export const mapStateToProps = ({ user}) =>
+  ({
+    user,
+  });
+
+export default connect(mapStateToProps, {
+  createUser
+})(Signup);
