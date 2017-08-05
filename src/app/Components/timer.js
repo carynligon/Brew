@@ -6,12 +6,10 @@ import {
 } from 'react-native';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
-import Header from './header';
-import Instructions from './instructions';
-
-import methods from '../Fixtures/methods';
-
-import styles from '../Styles/components/timer';
+import Header from '~/components/header';
+import Instructions from '~/components/instructions';
+import methods from '~/fixtures/methods';
+import styles from '~/styles/components/timer';
 
 export class Timer extends Component {
     constructor(props) {

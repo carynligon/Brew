@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { firebaseConfig } from '../settings';
+import { firebaseConfig } from '~/settings';
 import {
   AsyncStorage,
   NavigatorIOS,
@@ -12,15 +12,14 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as ActionCreators from '../Actions/index';
-
-import styles from '../Styles/app';
-import settings from '../settings';
-import store from '../store';
-import {loggedIn, startLoad, stopLoad} from '../Actions/index';
-import { Home } from './Home';
-import { Login } from './Login';
-import { Signup } from './Signup';
+import * as ActionCreators from '~/redux/actions/index';
+import {loggedIn, startLoad, stopLoad} from '~/redux/actions/index';
+import styles from '~/styles/app';
+import settings from '~/settings';
+import store from '~/redux/store';
+import { Home } from '~/pages/Home';
+import { Login } from '~/pages/Login';
+import { Signup } from '~/pages/Signup';
 
 let firebaseApp;
 
@@ -70,7 +69,7 @@ class Main extends Component {
     }
     return (
       <View style={styles.container}>
-        {start}
+        <Home {...this.props} />
       </View>
     )
   }

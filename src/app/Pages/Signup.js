@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import styles from '../Styles/signup';
-import settings from '../settings';
-import { Home } from './Home';
-import { Login } from './Login';
-import { createUser } from '../Actions/index';
+import styles from '~/styles/signup';
+import settings from '~/settings';
+import { Home } from '~/pages//Home';
+import { Login } from '~/pages//Login';
+import { createUser } from '~/redux/actions/index';
 
 export class Signup extends Component {
   constructor() {

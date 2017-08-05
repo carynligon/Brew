@@ -8,9 +8,9 @@ import {
   View
 } from 'react-native';
 
-import styles from '../Styles/home';
-import settings from '../settings';
-import { Timer } from '../Components/timer';
+import styles from '~/styles/home';
+import settings from '~/settings';
+import { Timer } from '~/components/timer';
 
 export class Home extends React.Component {
   constructor(props) {

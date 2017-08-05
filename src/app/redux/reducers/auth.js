@@ -1,4 +1,4 @@
-import { CREATE_USER_SUCCESS, CREATE_USER_FAIL, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from '../Constants/ActionTypes';
+import { CREATE_USER_SUCCESS, CREATE_USER_FAIL, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from '~/redux/constants/ActionTypes';
 
 const initialState = {
     loggingIn: false,

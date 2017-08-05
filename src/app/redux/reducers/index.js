@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import auth from './auth';
-import load from './load';
-import timer from './timer';
+import auth from '~/redux/reducers/auth';
+import load from '~/redux/reducers/load';
+import timer from '~/redux/reducers/timer';
 
 const rootReducer = combineReducers({
   auth,

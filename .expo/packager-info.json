@@ -2,7 +2,7 @@
   "expoServerPort": 19001,
   "expoServerNgrokUrl": "https://xt-yc2.carynligon.brew.exp.direct",
   "packagerNgrokUrl": "https://packager.xt-yc2.carynligon.brew.exp.direct",
-  "ngrokPid": 12694,
-  "packagerPort": 19003,
-  "packagerPid": 12674
+  "ngrokPid": 17212,
+  "packagerPort": 19002,
+  "packagerPid": 17192
 }

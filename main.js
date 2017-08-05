@@ -6,9 +6,9 @@ import {
     NavigatorIOS,
     StyleSheet,
 } from 'react-native';
-import App from './src/app/Pages/App';
+import App from './src/app/pages/App';
 import { Provider } from 'react-redux';
-import store from './src/app/store';
+import store from './src/app/redux/store';
 
 const Main = React.createClass({
   getInitialState() {

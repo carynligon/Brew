@@ -4,9 +4,9 @@ import {
     Text,
     View
 } from 'react-native';
-import methods from '../Fixtures/methods';
+import methods from '~/fixtures/methods';
 
-import styles from '../Styles/components/progress_bar';
+import styles from '~/styles/components/progress_bar';
 
 export default class ProgressBar extends Component {
     state = {

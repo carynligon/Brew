@@ -9,13 +9,12 @@ import {
   View,
 } from 'react-native';
 
-import styles from '../Styles/login';
-import settings from '../settings';
-import store from '../store';
-import {loggedIn, startLoad, stopLoad} from '../Actions/index';
-import { Home } from './Home';
-import { Signup } from './Signup';
-import { loginUser } from '../Actions/index';
+import styles from '~/styles/login';
+import settings from '~/settings';
+import store from '~/redux/store';
+import {loginUser, startLoad, stopLoad} from '~/redux/actions/index';
+import { Home } from '~/pages/Home';
+import { Signup } from '~/pages/Signup';
 
 export class Login extends Component {
   constructor(props) {

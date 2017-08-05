@@ -1,14 +1,14 @@
 import { createStore } from 'redux';
 
-import rootReducer from './Reducers/index';
+import rootReducer from './reducers/index';
 
 const defaultState = {};
 
 const store = createStore(rootReducer, defaultState);
 
 if (module.hot) {
-    module.hot.accept('./Reducers/', () => {
-        const nextRootReducer = require('./Reducers/index').default;
+    module.hot.accept('./reducers/', () => {
+        const nextRootReducer = require('./reducers/index').default;
         store.replaceReducer(nextRootReducer);
     });
 }
