@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 import { CREATE_USER_SUCCESS, CREATE_USER_FAIL, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from '~/redux/constants/ActionTypes';
+import store from '~/redux/store';
 
 export const createUser = (email, pass) => {
     try {
@@ -12,15 +13,37 @@ export const createUser = (email, pass) => {
     }
 }
 
-export const loginUser = (email, pass) => {
-    try {
-        firebase.auth().signInWithEmailAndPassword(email, pass).then((resp) => {
-            dispatchLogin();
+// export const loginUser = (email, pass) => {
+//     try {
+//         firebase.auth().signInWithEmailAndPassword(email, pass).then((resp) => {
+//             dispatchLogin();
+//         })
+//     }
+//     catch (error) {
+//         return { type: LOGIN_USER_FAIL };
+//     }
+// }
+
+export const loginUserSuccess = (resp) => {
+    return {
+        type: LOGIN_USER_SUCCESS,
+        user: resp,
+    }
+}
+
+export const loginUserFail = (error) => {
+    return {
+        type: LOGIN_USER_FAIL,
+        error
+    }
+}
+
+export const loginUser = (email, pass) => dispatch => {
+    firebase.auth().signInWithEmailAndPassword(email, pass)
+        .then((resp) => {
+            return dispatch(loginUserSuccess(resp));
         })
-    }
-    catch (error) {
-        return { type: LOGIN_USER_FAIL };
-    }
+        .catch((error) => { dispatch(loginUserFail)});
 }
 
 export const dispatchLogin = () => {

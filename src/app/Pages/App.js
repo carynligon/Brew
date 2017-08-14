@@ -69,7 +69,7 @@ class Main extends Component {
     }
     return (
       <View style={styles.container}>
-        <Home {...this.props} />
+        {start}
       </View>
     )
   }

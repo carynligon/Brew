@@ -4,14 +4,14 @@ const initialState = {
     loggingIn: false,
     loggedIn: false,
     signingIn: false,
-    loggingOut: false
+    loggingOut: false,
 }
 
 const auth = (state = [], action) => {
     switch(action.type) {
         case(LOGIN_USER_SUCCESS):
-            console.log('login action', action)
-            return { ...state, loggedIn: true }
+            const userId = action.user.uid;
+            return { ...state, loggedIn: true, userId  }
         case(LOGIN_USER_FAIL):
             return { ...state, loggedIn: false }
         case('LOG_OUT'):

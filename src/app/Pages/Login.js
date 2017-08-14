@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   AsyncStorage,
   NavigatorIOS,
@@ -39,6 +40,16 @@ export class Login extends Component {
       }
     });
   }
+  componentWillReceiveProps(nextProps) {
+    this.props.toggleNavBar();
+    this.props.navigator.push({
+      title: "Home",
+      component: Home,
+      passProps: {
+        toggleNavBar: this.props.toggleNavBar,
+      }
+    });
+  }
   handleEmail(text) {
     this.setState({email: text});
   }
@@ -48,7 +59,7 @@ export class Login extends Component {
   handlePress() {
     const { email, error, password } = this.state;
     if (!error) {
-      loginUser(email, password);
+      this.props.loginUser(email, password);
     }
       // if (response.status === 200) {
       //   response.json().then((data) => {
@@ -60,15 +71,6 @@ export class Login extends Component {
       //     this.setState({
       //       email: '',
       //       password: '',
-      //     });
-      //     this.props.toggleNavBar();
-      //     this.props.navigator.push({
-      //       title: "Home Page",
-      //       component: Home,
-      //       passProps: {
-      //         ...this.props,
-      //         user: this.state.user
-      //       }
       //     });
       //   })
       // } else {
@@ -114,3 +116,11 @@ export class Login extends Component {
     )
   }
 }
+
+export const mapStateToProps = ({ user }) => ({ user })
+
+export const mapDispatchToProps = () => ({
+  loginUser: () => {},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

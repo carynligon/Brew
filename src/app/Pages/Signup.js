@@ -71,7 +71,6 @@ export class Signup extends Component {
       createUser(email, password);
     }
     setTimeout(() => {
-      console.log(this.props)
     }, 5000)
   }
 
