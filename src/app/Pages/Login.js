@@ -40,7 +40,13 @@ export class Login extends Component {
       }
     });
   }
-  componentWillReceiveProps(nextProps) {
+  handleEmail(text) {
+    this.setState({email: text});
+  }
+  handlePassword(text) {
+    this.setState({password: text});
+  }
+  navigate() {
     this.props.toggleNavBar();
     this.props.navigator.push({
       title: "Home",
@@ -50,34 +56,14 @@ export class Login extends Component {
       }
     });
   }
-  handleEmail(text) {
-    this.setState({email: text});
-  }
-  handlePassword(text) {
-    this.setState({password: text});
+  componentWillReceiveProps(nextProps) {
+    this.navigate();
   }
   handlePress() {
     const { email, error, password } = this.state;
     if (!error) {
       this.props.loginUser(email, password);
     }
-      // if (response.status === 200) {
-      //   response.json().then((data) => {
-      //     AsyncStorage.multiSet([
-      //       ['token', data["user-token"]],
-      //       ['id', data["objectId"]]
-      //       ]);
-      //     this.setState({user: data});
-      //     this.setState({
-      //       email: '',
-      //       password: '',
-      //     });
-      //   })
-      // } else {
-      //   this.setState({error: true});
-      // }
-    // })
-    // .catch((error) => {console.error("login error: " + error)});
   }
   render() {
     let inputStyle = styles.textBox;
