@@ -37,22 +37,12 @@ class Main extends Component {
     });
   }
 
-  switchSignup() {
-    this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: "Signup",
-      component: Signup,
-      passProps: {
-        toggleNavBar: this.props.toggleNavBar,
-      }
-    });
-  }
-
   componentDidMount() {
     firebaseApp = firebase.initializeApp(firebaseConfig);
   }
 
   render() {
+    console.log('render props', this.props)
     let inputStyle = styles.textBox;
     let errorMessage;
     let start;

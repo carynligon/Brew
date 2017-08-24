@@ -46,18 +46,16 @@ export class Login extends Component {
   handlePassword(text) {
     this.setState({password: text});
   }
-  navigate() {
-    this.props.toggleNavBar();
-    this.props.navigator.push({
+  componentWillReceiveProps(nextProps) {
+    console.log('next props', nextProps)
+    nextProps.toggleNavBar();
+    nextProps.navigator.push({
       title: "Home",
       component: Home,
       passProps: {
-        toggleNavBar: this.props.toggleNavBar,
+        toggleNavBar: nextProps.toggleNavBar,
       }
     });
-  }
-  componentWillReceiveProps(nextProps) {
-    this.navigate();
   }
   handlePress() {
     const { email, error, password } = this.state;
@@ -66,6 +64,7 @@ export class Login extends Component {
     }
   }
   render() {
+    console.log(this.props)
     let inputStyle = styles.textBox;
     let errorMessage;
     if (this.state.error) {
@@ -97,7 +96,7 @@ export class Login extends Component {
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>Login</Text>
         </TouchableOpacity>
-        <Text onPress={this.switchSignup.bind(this)}>Sign up!</Text>
+        <Text onPress={this.props.switchSignup}>Sign up!</Text>
       </View>
     )
   }
@@ -105,8 +104,4 @@ export class Login extends Component {
 
 export const mapStateToProps = ({ user }) => ({ user })
 
-export const mapDispatchToProps = () => ({
-  loginUser: () => {},
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);
