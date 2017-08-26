@@ -4,9 +4,9 @@ import {
     View
 } from 'react-native';
 import _ from 'underscore';
-import methods from '../Fixtures/methods';
+import methods from '~/fixtures/methods';
 
-import styles from '../Styles/components/timer';
+import styles from '~/styles/components/timer';
 
 
 export default class Instructions extends Component {

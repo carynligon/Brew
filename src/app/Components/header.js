@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import ProgressBar from './progress_bar';
 
-import styles from '../Styles/components/header';
+import styles from '~/styles/components/header';
 
 export default class Header extends Component {
     render() {

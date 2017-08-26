@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { firebaseConfig } from '~/settings';
 import {
   AsyncStorage,
   NavigatorIOS,
@@ -8,14 +10,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as ActionCreators from '~/redux/actions/index';
+import {loggedIn, startLoad, stopLoad} from '~/redux/actions/index';
+import styles from '~/styles/app';
+import settings from '~/settings';
+import store from '~/redux/store';
+import { Home } from '~/pages/Home';
+import { Login } from '~/pages/Login';
+import { Signup } from '~/pages/Signup';
 
-import styles from '../Styles/app';
-import settings from '../settings';
-import store from '../store';
-import {loggedIn, startLoad, stopLoad} from '../Actions/index';
-import { Home } from './Home';
-import { Login } from './Login';
-import { Signup } from './Signup';
+let firebaseApp;
 
 class Main extends Component {
   constructor(props) {
@@ -31,43 +37,33 @@ class Main extends Component {
     });
   }
 
-  switchSignup() {
-    this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: "Signup",
-      component: Signup,
-      passProps: {
-        toggleNavBar: this.props.toggleNavBar,
-      }
-    });
+  componentDidMount() {
+    firebaseApp = firebase.initializeApp(firebaseConfig);
   }
 
   render() {
+    console.log('render props', this.props)
     let inputStyle = styles.textBox;
     let errorMessage;
-    let stuff;
+    let start;
     if (this.state.error) {
       inputStyle = styles.error;
       errorMessage = "Invalid email or password"
     }
     if (this.state.loggedIn) {
       if (this.state.loggedIn === 'yes') {
-        stuff = <Home {...this.props} />
+        start = <Home {...this.props} />
       } else {
-        stuff = <Login {...this.props} />
+        start = <Signup {...this.props} />
       }
     }
     return (
       <View style={styles.container}>
-        <Home {...this.props} />
+        {start}
       </View>
     )
   }
 }
-
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as ActionCreators from '../Actions/index';
 
 function mapStateToProps(state) {
     return state;

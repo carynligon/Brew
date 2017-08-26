@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   AsyncStorage,
   NavigatorIOS,
@@ -9,12 +10,12 @@ import {
   View,
 } from 'react-native';
 
-import styles from '../Styles/login';
-import settings from '../settings';
-import store from '../store';
-import {loggedIn, startLoad, stopLoad} from '../Actions/index';
-import { Home } from './Home';
-import { Signup } from './Signup';
+import styles from '~/styles/login';
+import settings from '~/settings';
+import store from '~/redux/store';
+import {loginUser, startLoad, stopLoad} from '~/redux/actions/index';
+import { Home } from '~/pages/Home';
+import { Signup } from '~/pages/Signup';
 
 export class Login extends Component {
   constructor(props) {
@@ -45,46 +46,25 @@ export class Login extends Component {
   handlePassword(text) {
     this.setState({password: text});
   }
-  handlePress() {
-    store.dispatch(startLoad());
-    fetch('https://api.backendless.com/v1/users/login', {
-      method: 'POST',
-      headers: settings,
-      body: JSON.stringify({
-        login: this.state.email,
-        password: this.state.password
-      })
-    })
-    .then((response) => {
-        store.dispatch(stopLoad());
-      if (response.status === 200) {
-        response.json().then((data) => {
-          AsyncStorage.multiSet([
-            ['token', data["user-token"]],
-            ['id', data["objectId"]]
-            ]);
-          this.setState({user: data});
-          this.setState({
-            email: '',
-            password: '',
-          });
-          this.props.toggleNavBar();
-          this.props.navigator.push({
-            title: "Home Page",
-            component: Home,
-            passProps: {
-              ...this.props,
-              user: this.state.user
-            }
-          });
-        })
-      } else {
-        this.setState({error: true});
+  componentWillReceiveProps(nextProps) {
+    console.log('next props', nextProps)
+    nextProps.toggleNavBar();
+    nextProps.navigator.push({
+      title: "Home",
+      component: Home,
+      passProps: {
+        toggleNavBar: nextProps.toggleNavBar,
       }
-    })
-    .catch((error) => {console.error("login error: " + error)});
+    });
+  }
+  handlePress() {
+    const { email, error, password } = this.state;
+    if (!error) {
+      this.props.loginUser(email, password);
+    }
   }
   render() {
+    console.log(this.props)
     let inputStyle = styles.textBox;
     let errorMessage;
     if (this.state.error) {
@@ -116,8 +96,12 @@ export class Login extends Component {
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>Login</Text>
         </TouchableOpacity>
-        <Text onPress={this.switchSignup.bind(this)}>Sign up!</Text>
+        <Text onPress={this.props.switchSignup}>Sign up!</Text>
       </View>
     )
   }
 }
+
+export const mapStateToProps = ({ user }) => ({ user })
+
+export default connect(mapStateToProps, { loginUser })(Login);
