@@ -68,10 +68,8 @@ export class Signup extends Component {
   handlePress() {
     const { email, error, password } = this.state;
     if (!error) {
-      createUser(email, password);
+      this.props.createUser(email, password);
     }
-    setTimeout(() => {
-    }, 5000)
   }
 
   render() {
@@ -128,6 +126,4 @@ export const mapStateToProps = ({ user}) =>
     user,
   });
 
-export default connect(mapStateToProps, {
-  createUser
-})(Signup);
+export default connect(mapStateToProps, { createUser })(Signup);

@@ -54,7 +54,7 @@ class Main extends Component {
       if (this.state.loggedIn === 'yes') {
         start = <Home {...this.props} />
       } else {
-        start = <Login {...this.props} />
+        start = <Signup {...this.props} />
       }
     }
     return (
