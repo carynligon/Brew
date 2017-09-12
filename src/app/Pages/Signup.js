@@ -7,6 +7,7 @@ import {
   NavigatorIOS
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 import styles from '~/styles/signup';
 import settings from '~/settings';
@@ -72,8 +73,13 @@ export class Signup extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.userId) {
+      Actions.home();
+    }
+  }
+
   render() {
-    console.log('sign up')
     let inputStyle = styles.textBox;
     let errorMsg;
     if (this.state.error) {
@@ -121,9 +127,9 @@ export class Signup extends Component {
   }
 }
 
-export const mapStateToProps = ({ user}) =>
+export const mapStateToProps = ({ auth}) =>
   ({
-    user,
+    auth,
   });
 
 export default connect(mapStateToProps, { createUser })(Signup);

@@ -1,8 +1,8 @@
 {
   "expoServerNgrokUrl": "https://ta-y4i.carynligon.brew.exp.direct",
   "packagerNgrokUrl": "https://packager.ta-y4i.carynligon.brew.exp.direct",
-  "ngrokPid": 25895,
+  "ngrokPid": 10003,
   "expoServerPort": 19000,
-  "packagerPort": 19002,
-  "packagerPid": 25868
+  "packagerPort": 19001,
+  "packagerPid": 9985
 }

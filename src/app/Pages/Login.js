@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import styles from '~/styles/login';
 import settings from '~/settings';
@@ -47,15 +48,9 @@ export class Login extends Component {
     this.setState({password: text});
   }
   componentWillReceiveProps(nextProps) {
-    console.log('next props', nextProps)
-    nextProps.toggleNavBar();
-    nextProps.navigator.push({
-      title: "Home",
-      component: Home,
-      passProps: {
-        toggleNavBar: nextProps.toggleNavBar,
-      }
-    });
+    if (nextProps.auth.userId) {
+      Actions.home();
+    }
   }
   handlePress() {
     const { email, error, password } = this.state;
@@ -64,7 +59,6 @@ export class Login extends Component {
     }
   }
   render() {
-    console.log(this.props)
     let inputStyle = styles.textBox;
     let errorMessage;
     if (this.state.error) {
@@ -102,6 +96,6 @@ export class Login extends Component {
   }
 }
 
-export const mapStateToProps = ({ user }) => ({ user })
+export const mapStateToProps = ({ auth }) => ({ auth })
 
 export default connect(mapStateToProps, { loginUser })(Login);
