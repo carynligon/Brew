@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   AsyncStorage,
-  NavigatorIOS,
   Platform,
   Text,
   TextInput,

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   AsyncStorage,
-  NavigatorIOS,
   Platform,
   Text,
   TextInput,
@@ -22,16 +21,6 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  switchSignup() {
-    this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: "Signup",
-      component: Signup,
-      passProps: {
-        toggleNavBar: this.props.toggleNavBar,
-      }
-    });
   }
   handleEmail(text) {
     this.setState({email: text});
@@ -83,7 +72,6 @@ export class Login extends Component {
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>Login</Text>
         </TouchableOpacity>
-        <Text onPress={this.props.switchSignup}>Sign up!</Text>
       </View>
     )
   }

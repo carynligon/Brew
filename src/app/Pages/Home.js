@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {
   AsyncStorage,
   Image,
-  NavigatorIOS,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import styles from '~/styles/home';
 import settings from '~/settings';
@@ -29,15 +29,8 @@ export class Home extends React.Component {
     })
     .then((response) => {
       if (response.status === 200) {
-        AsyncStorage.removeItem('token');
-        this.props.toggleNavBar();
-        this.props.navigator.push({
-          title: "Login",
-          component: Login,
-          passProps: {
-            toggleNavBar: this.props.toggleNavBar,
-          }
-        });
+        AsyncStorage.removeItem('id');
+        Actions.auth();
       }
     })
     .catch((error) => {console.error("login error: " + error)});

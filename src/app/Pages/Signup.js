@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  NavigatorIOS
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -23,17 +22,6 @@ export class Signup extends Component {
       password: ''
     }
 
-  }
-
-  switchLogin() {
-    this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: "Login",
-      component: Login,
-      passProps: {
-        toggleNavBar: this.props.toggleNavBar,
-      }
-    });
   }
 
   handleName(text) {
@@ -121,7 +109,6 @@ export class Signup extends Component {
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>add</Text>
         </TouchableOpacity>
-        <Text onPress={this.switchLogin.bind(this)}>Login!</Text>
       </View>
     )
   }

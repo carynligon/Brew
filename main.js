@@ -2,7 +2,6 @@ import Expo from 'expo';
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    NavigatorIOS,
     StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -35,7 +34,6 @@ class Main extends Component {
 
   render() {
     const ConnectedRouter = connect()(Router);
-    console.log(this.state)
     const Scenes = Actions.create(
       <Scene key='root'>
         <Scene key="placeholder" tabs={false} hideNavBar type={ActionConst.REPLACE}>
@@ -78,5 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// AppRegistry.registerComponent('Brew', () => Main);
 Expo.registerRootComponent(Main);
