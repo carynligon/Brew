@@ -22,14 +22,6 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    AsyncStorage.getItem('token').then((data) => {
-      if (data) {
-        this.setState({loggedIn: 'yes'});
-      }
-      else {
-        return this.setState({loggedIn: 'no'});
-      }
-    });
   }
   switchSignup() {
     this.props.toggleNavBar();
@@ -50,6 +42,7 @@ export class Login extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.userId) {
       Actions.home();
+      AsyncStorage.setItem('id', nextProps.auth.userId)
     }
   }
   handlePress() {
