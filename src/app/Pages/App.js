@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
-import { firebaseConfig } from '~/settings';
 import {
   AsyncStorage,
-  NavigatorIOS,
   Platform,
   Text,
   TextInput,
@@ -21,8 +18,6 @@ import { Home } from '~/pages/Home';
 import { Login } from '~/pages/Login';
 import { Signup } from '~/pages/Signup';
 
-let firebaseApp;
-
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -37,12 +32,7 @@ class Main extends Component {
     });
   }
 
-  componentDidMount() {
-    firebaseApp = firebase.initializeApp(firebaseConfig);
-  }
-
   render() {
-    console.log('render props', this.props)
     let inputStyle = styles.textBox;
     let errorMessage;
     let start;
@@ -59,7 +49,7 @@ class Main extends Component {
     }
     return (
       <View style={styles.container}>
-        {start}
+        <Home {...this.props} />
       </View>
     )
   }

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   AsyncStorage,
-  NavigatorIOS,
   Platform,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import styles from '~/styles/login';
 import settings from '~/settings';
@@ -21,24 +21,6 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    AsyncStorage.getItem('token').then((data) => {
-      if (data) {
-        this.setState({loggedIn: 'yes'});
-      }
-      else {
-        return this.setState({loggedIn: 'no'});
-      }
-    });
-  }
-  switchSignup() {
-    this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: "Signup",
-      component: Signup,
-      passProps: {
-        toggleNavBar: this.props.toggleNavBar,
-      }
-    });
   }
   handleEmail(text) {
     this.setState({email: text});
@@ -47,15 +29,10 @@ export class Login extends Component {
     this.setState({password: text});
   }
   componentWillReceiveProps(nextProps) {
-    console.log('next props', nextProps)
-    nextProps.toggleNavBar();
-    nextProps.navigator.push({
-      title: "Home",
-      component: Home,
-      passProps: {
-        toggleNavBar: nextProps.toggleNavBar,
-      }
-    });
+    if (nextProps.auth.userId) {
+      Actions.home();
+      AsyncStorage.setItem('id', nextProps.auth.userId)
+    }
   }
   handlePress() {
     const { email, error, password } = this.state;
@@ -64,7 +41,6 @@ export class Login extends Component {
     }
   }
   render() {
-    console.log(this.props)
     let inputStyle = styles.textBox;
     let errorMessage;
     if (this.state.error) {
@@ -96,12 +72,11 @@ export class Login extends Component {
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>Login</Text>
         </TouchableOpacity>
-        <Text onPress={this.props.switchSignup}>Sign up!</Text>
       </View>
     )
   }
 }
 
-export const mapStateToProps = ({ user }) => ({ user })
+export const mapStateToProps = ({ auth }) => ({ auth })
 
 export default connect(mapStateToProps, { loginUser })(Login);

@@ -4,9 +4,9 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  NavigatorIOS
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 import styles from '~/styles/signup';
 import settings from '~/settings';
@@ -22,17 +22,6 @@ export class Signup extends Component {
       password: ''
     }
 
-  }
-
-  switchLogin() {
-    this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: "Login",
-      component: Login,
-      passProps: {
-        toggleNavBar: this.props.toggleNavBar,
-      }
-    });
   }
 
   handleName(text) {
@@ -72,8 +61,13 @@ export class Signup extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.userId) {
+      Actions.home();
+    }
+  }
+
   render() {
-    console.log('sign up')
     let inputStyle = styles.textBox;
     let errorMsg;
     if (this.state.error) {
@@ -115,15 +109,14 @@ export class Signup extends Component {
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>add</Text>
         </TouchableOpacity>
-        <Text onPress={this.switchLogin.bind(this)}>Login!</Text>
       </View>
     )
   }
 }
 
-export const mapStateToProps = ({ user}) =>
+export const mapStateToProps = ({ auth}) =>
   ({
-    user,
+    auth,
   });
 
 export default connect(mapStateToProps, { createUser })(Signup);

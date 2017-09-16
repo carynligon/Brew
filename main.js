@@ -2,55 +2,59 @@ import Expo from 'expo';
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    AsyncStorage,
-    NavigatorIOS,
     StyleSheet,
 } from 'react-native';
+import { connect } from 'react-redux';
+import * as firebase from 'firebase';
+import { firebaseConfig } from './src/app/settings';
 import App from './src/app/pages/App';
+import Signup from './src/app/pages/Signup';
+import Login from './src/app/pages/Login';
+import Placeholder from './src/app/pages/Placeholder';
 import { Provider } from 'react-redux';
 import store from './src/app/redux/store';
 
-const Main = React.createClass({
-  getInitialState() {
-    return {navigationBarHidden: false};
-  },
+import {
+  Actions,
+  ActionConst,
+  Scene,
+  Router,
+} from 'react-native-router-flux';
 
-  toggleNavBar() {
-    this.setState({navigationBarHidden: !this.state.navigationBarHidden});
-  },
+let firebaseApp;
 
+class Main extends Component {
+  constructor() {
+    super();
+    this.state = { loggedIn: false };
+  }
   componentWillMount() {
-    AsyncStorage.getItem('token').done((value) => {
-      if (value) {
-        this.setState({loggedIn: true});
-      } else {
-        this.setState({loggedIn: true});
-      }
-    });
-  },
+    firebaseApp = firebase.initializeApp(firebaseConfig);
+  }
 
   render() {
-    let initialRoute = {
-            routeComponent: App,
-            routeName: 'App'
-        }
+    const ConnectedRouter = connect()(Router);
+    const Scenes = Actions.create(
+      <Scene key='root'>
+        <Scene key="placeholder" tabs={false} hideNavBar type={ActionConst.REPLACE}>
+          <Scene key="placeholderPage" title="Placeholder" component={Placeholder} />
+        </Scene>
+        <Scene key='auth' tabs={true} hideNavBar type=      {ActionConst.REPLACE}>
+              <Scene key='tab1' title='Login' component={Login}></Scene>
+              <Scene key='tab2' title='Signup' component={Signup}></Scene>
+          </Scene>
+          <Scene key='home' tabs={false} hideNavBar type=      {ActionConst.REPLACE}>
+              <Scene key='home' title='App' component={App}></Scene>
+          </Scene>
+        </Scene>
+    );
     return (
       <Provider store={store}>
-          <NavigatorIOS
-            initialRoute={{
-              component: initialRoute.routeComponent,
-              title: initialRoute.routeName,
-              passProps: {
-                toggleNavBar: this.toggleNavBar
-              }
-            }}
-            navigationBarHidden={true}
-            style={{flex: 1}}
-          />
+          <ConnectedRouter scenes={Scenes} />
       </Provider>
     )
   }
-});
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -72,5 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// AppRegistry.registerComponent('Brew', () => Main);
 Expo.registerRootComponent(Main);
