@@ -22,7 +22,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    AsyncStorage.getItem('token').then((data) => {
+    AsyncStorage.getItem('id').then((data) => {
       if (data) {
         this.setState({loggedIn: 'yes'});
       }
@@ -49,7 +49,7 @@ class Main extends Component {
     }
     return (
       <View style={styles.container}>
-        <Home {...this.props} />
+        {start}
       </View>
     )
   }
