@@ -1,8 +1,8 @@
 {
   "expoServerNgrokUrl": "https://vu-zzw.carynligon.brew.exp.direct",
   "packagerNgrokUrl": "https://packager.vu-zzw.carynligon.brew.exp.direct",
-  "ngrokPid": 23036,
+  "ngrokPid": 1661,
   "expoServerPort": 19000,
-  "packagerPort": 19002,
-  "packagerPid": 23370
+  "packagerPort": 19001,
+  "packagerPid": 1632
 }

@@ -9,7 +9,7 @@ import TimerMixin from 'react-timer-mixin';
 import Header from '~/components/header';
 import Instructions from '~/components/instructions';
 import methods from '~/fixtures/methods';
-import styles from '~/styles/components/timer';
+import { timerStyles } from '~/styles';
 
 export class Timer extends Component {
     constructor(props) {
@@ -115,20 +115,20 @@ export class Timer extends Component {
             timerText = running ? 'pause' : 'start';
         }
         return (
-            <View style={styles.container}>
+            <View style={timerStyles.container}>
                 <Header time={totalSeconds} method={method} />
                 <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
-                <Text style={styles.timerText}>
+                <Text style={timerStyles.timerText}>
                     {textTime}
                 </Text>
                 {!disabled && <TouchableOpacity
-                    style={styles.startBtn}
+                    style={timerStyles.startBtn}
                     onPress={this.handleStartStop.bind(this)}>
-                  <Text style={styles.startText}>{timerText}</Text>
+                  <Text style={timerStyles.startText}>{timerText}</Text>
                 </TouchableOpacity>}
                 {!disabled && <TouchableOpacity
                     onPress={this.resetTimer.bind(this)}>
-                  <Text style={styles.resetBtn}>Reset</Text>
+                  <Text style={timerStyles.resetBtn}>Reset</Text>
                 </TouchableOpacity>}
             </View>
             );

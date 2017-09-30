@@ -5,15 +5,15 @@ import {
 } from 'react-native';
 import ProgressBar from './progress_bar';
 
-import styles from '~/styles/components/header';
+import { headerStyles } from '~/styles';
 
 export default class Header extends Component {
     render() {
         return (
-            <View style={styles.header}>
-                <Text style={styles.title}>Brew Guides</Text>
-                <Text style={styles.method}>Chemex</Text>
-                <Text style={styles.details}>Serves 2 | 4 minutes</Text>
+            <View style={headerStyles.header}>
+                <Text style={headerStyles.title}>Brew Guides</Text>
+                <Text style={headerStyles.method}>Chemex</Text>
+                <Text style={headerStyles.details}>Serves 2 | 4 minutes</Text>
                 <ProgressBar {...this.props}/>
             </View>
             );

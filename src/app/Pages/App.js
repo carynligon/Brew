@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ActionCreators from '~/redux/actions/index';
 import {loggedIn, startLoad, stopLoad} from '~/redux/actions/index';
-import styles from '~/styles/app';
+import { appStyles } from '~/styles';
 import settings from '~/settings';
 import store from '~/redux/store';
 import { Home } from '~/pages/Home';
@@ -33,11 +33,11 @@ class Main extends Component {
   }
 
   render() {
-    let inputStyle = styles.textBox;
+    let inputStyle = appStyles.textBox;
     let errorMessage;
     let start;
     if (this.state.error) {
-      inputStyle = styles.error;
+      inputStyle = appStyles.error;
       errorMessage = "Invalid email or password"
     }
     if (this.state.loggedIn) {
@@ -48,7 +48,7 @@ class Main extends Component {
       }
     }
     return (
-      <View style={styles.container}>
+      <View style={appStyles.container}>
         {start}
       </View>
     )

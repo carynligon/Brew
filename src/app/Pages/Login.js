@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import styles from '~/styles/login';
+import { loginStyles } from '~/styles';
 import settings from '~/settings';
 import store from '~/redux/store';
 import {loginUser, startLoad, stopLoad} from '~/redux/actions/index';
@@ -41,14 +41,14 @@ export class Login extends Component {
     }
   }
   render() {
-    let inputStyle = styles.textBox;
+    let inputStyle = loginStyles.textBox;
     let errorMessage;
     if (this.state.error) {
-        inputStyle = styles.error;
+        inputStyle = loginStyles.error;
     }
     return (
-      <View style={styles.container}>
-        <Text style={styles.titleStyles}>Login</Text>
+      <View style={loginStyles.container}>
+        <Text style={loginStyles.titleStyles}>Login</Text>
         <Text>email</Text>
         <TextInput
           className="email"
@@ -68,8 +68,8 @@ export class Login extends Component {
           accessibilityLabel="password"
           onChangeText={this.handlePassword.bind(this)}
         />
-        <Text style={styles.errorMsg}>{errorMessage}</Text>
-        <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
+        <Text style={loginStyles.errorMsg}>{errorMessage}</Text>
+        <TouchableOpacity style={loginStyles.button} onPress={this.handlePress.bind(this)}>
           <Text>Login</Text>
         </TouchableOpacity>
       </View>
