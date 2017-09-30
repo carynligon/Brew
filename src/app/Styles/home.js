@@ -1,15 +1,11 @@
-import { StyleSheet } from 'react-native';
+import layout from '~/styles/globals/layout';
 
-export default StyleSheet.create({
-  container: {
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    flex: 1,
-  },
+export default {
+  container: layout.container,
   img: {
   },
   logout: {
     alignSelf: 'flex-start',
     marginTop: 15,
   }
-});
+};

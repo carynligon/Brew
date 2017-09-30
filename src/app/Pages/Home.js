@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import styles from '~/styles/home';
+import { homeStyles } from '~/styles';
 import settings from '~/settings';
 import { Timer } from '~/components/timer';
 
@@ -37,7 +37,7 @@ export class Home extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={homeStyles.container}>
         <Timer {...this.props} />
       </View>
     );

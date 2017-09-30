@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import styles from '~/styles/signup';
+import { signupStyles } from '~/styles';
 import settings from '~/settings';
 import { Home } from '~/pages//Home';
 import { Login } from '~/pages//Login';
@@ -68,15 +68,15 @@ export class Signup extends Component {
   }
 
   render() {
-    let inputStyle = styles.textBox;
+    let inputStyle = signupStyles.textBox;
     let errorMsg;
     if (this.state.error) {
-      inputStyle = styles.error;
+      inputStyle = signupStyles.error;
       errorMsg = (<Text style={{color: 'red'}}>invalid username or password</Text>);
     }
     return (
-      <View style={styles.container}>
-        <Text style={styles.titleStyles}>Sign up</Text>
+      <View style={signupStyles.container}>
+        <Text style={signupStyles.titleStyles}>Sign up</Text>
         <Text>name</Text>
         <TextInput
           className="name"
@@ -106,7 +106,7 @@ export class Signup extends Component {
           onChangeText={this.handlePassword.bind(this)}
         />
         {errorMsg}
-        <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
+        <TouchableOpacity style={signupStyles.button} onPress={this.handlePress.bind(this)}>
           <Text>add</Text>
         </TouchableOpacity>
       </View>

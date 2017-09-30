@@ -1,19 +1,15 @@
-import { StyleSheet } from 'react-native';
-import globals from './globals/variables';
+import variables from './globals/variables';
+import layout from './globals/layout';
 
-export default StyleSheet.create({
+export default {
   button: {
     backgroundColor: '#34edcc',
     marginTop: 5,
     padding: 5
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'stretch',
-  },
+  container: layout.container,
   error: {
-    backgroundColor: globals.white,
+    backgroundColor: variables.white,
     borderColor: 'red',
     borderStyle: 'solid',
     borderWidth: 2,
@@ -27,7 +23,7 @@ export default StyleSheet.create({
     marginBottom: 10
   },
   textBox: {
-    backgroundColor: globals.white,
+    backgroundColor: variables.white,
     height: 30,
     margin: 15,
     padding: 5,
@@ -41,4 +37,4 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   }
-});
+};

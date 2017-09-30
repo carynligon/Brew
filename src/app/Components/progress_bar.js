@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import methods from '~/fixtures/methods';
 
-import styles from '~/styles/components/progress_bar';
+import { progressStyles } from '~/styles';
 
 export default class ProgressBar extends Component {
     state = {
@@ -32,13 +32,13 @@ export default class ProgressBar extends Component {
     render() {
         const { progressAnim } = this.state;
         return (
-            <View style={styles.container}>
+            <View style={progressStyles.container}>
                 <Animated.View
                     style={{
                         width: progressAnim
                     }}
                 >
-                    <View style={styles.bar}></View>
+                    <View style={progressStyles.bar}></View>
                 </Animated.View>
             </View>
         );

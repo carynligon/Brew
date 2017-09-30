@@ -6,7 +6,7 @@ import {
 import _ from 'underscore';
 import methods from '~/fixtures/methods';
 
-import styles from '~/styles/components/timer';
+import { timerStyles } from '~/styles';
 
 
 export default class Instructions extends Component {
@@ -77,14 +77,14 @@ export default class Instructions extends Component {
         let instructionTitle = methods[method].timedSteps[0].title;
 
         return (
-            <View style={styles.instructionsContainer}>
-                <Text style={styles.instructionsTitle}>
+            <View style={timerStyles.instructionsContainer}>
+                <Text style={timerStyles.instructionsTitle}>
                     {currentStep ? currentStep.title : "Enjoy!"}
                 </Text>
-                <Text style={styles.instructionsText}>
+                <Text style={timerStyles.instructionsText}>
                     {currentStep && currentStep.directions}
                 </Text>
-                <Text style={styles.nextStep}>
+                <Text style={timerStyles.nextStep}>
                     {nextStep && `Next: ${nextStep.title} `}
                     {nextStepTimeText}
                 </Text>

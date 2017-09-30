@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import globals from '../globals/variables';
+import variables from '~/styles/globals/variables';
 
-export default StyleSheet.create({
+export default {
     container: {
         alignItems: 'center',
         flex: 1,
@@ -31,19 +30,19 @@ export default StyleSheet.create({
         textAlign: 'left',
     },
     resetBtn: {
-        color: globals.primary,
+        color: variables.primary,
         fontSize: 16,
         marginBottom: 10
     },
     startBtn: {
-        backgroundColor: globals.primary,
+        backgroundColor: variables.primary,
         borderRadius: 3,
         marginTop: 10,
         padding: 20,
         width: 120
     },
     startText: {
-        color: globals.white,
+        color: variables.white,
         fontSize: 16,
         textAlign: 'center'
     },
@@ -51,8 +50,8 @@ export default StyleSheet.create({
         fontSize: 14,
     },
     timerText: {
-        color: globals.gray_20,
+        color: variables.gray_20,
         fontSize: 76,
         marginBottom: 20,
     }
-});
+};

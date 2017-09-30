@@ -1,20 +1,19 @@
-import { StyleSheet } from 'react-native';
-import globals from '../globals/variables';
+import variables from '../globals/variables';
 
-export default StyleSheet.create({
+export default {
     header: {
         alignSelf: 'stretch',
-        backgroundColor: globals.primary,
+        backgroundColor: variables.primary,
         marginTop: 10,
     },
     details: {
-        color: globals.gray_20,
+        color: variables.gray_20,
         fontSize: 16,
         paddingBottom: 20,
         textAlign: 'center'
     },
     method: {
-        color: globals.white,
+        color: variables.white,
         fontSize: 48,
         fontWeight: 'bold',
         paddingTop: 20,
@@ -22,10 +21,10 @@ export default StyleSheet.create({
         textAlign: 'center'
     },
     title: {
-        color: globals.white,
+        color: variables.white,
         fontSize: 18,
         fontWeight: 'bold',
         marginTop: 20,
         textAlign: 'center'
     }
-});
+};
