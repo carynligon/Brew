@@ -1,6 +1,7 @@
 {
     "chemex": {
         "name": "chemex",
+        "ingredients": ["thing1", "thing2", "thing3"],
         "coffeeWeight": 41,
         "waterWeight": 700,
         "time": 40,
@@ -37,6 +38,7 @@
     },
     "aeropress": {
         "name": "aeropress",
+        "ingredients": ["thing1", "thing2", "thing3"],
         "coffeeWeight": 41,
         "waterWeight": 700,
         "time": 40,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+    ScrollView,
     Text,
     TouchableOpacity,
     View
@@ -8,6 +9,7 @@ import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 import Header from '~/components/header';
 import Instructions from '~/components/instructions';
+import InstructionsList from '~/components/instructions_list';
 import methods from '~/fixtures/methods';
 import { timerStyles } from '~/styles';
 
@@ -115,22 +117,25 @@ export class Timer extends Component {
             timerText = running ? 'pause' : 'start';
         }
         return (
-            <View style={timerStyles.container}>
-                <Header time={totalSeconds} method={method} />
-                <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
-                <Text style={timerStyles.timerText}>
-                    {textTime}
-                </Text>
-                {!disabled && <TouchableOpacity
-                    style={timerStyles.startBtn}
-                    onPress={this.handleStartStop.bind(this)}>
-                  <Text style={timerStyles.startText}>{timerText}</Text>
-                </TouchableOpacity>}
-                {!disabled && <TouchableOpacity
-                    onPress={this.resetTimer.bind(this)}>
-                  <Text style={timerStyles.resetBtn}>Reset</Text>
-                </TouchableOpacity>}
-            </View>
+            <ScrollView contentContainerStyle={timerStyles.contentContainer}>
+                <View style={timerStyles.container}>
+                    <Header time={totalSeconds} method={method} />
+                    <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
+                    <Text style={timerStyles.timerText}>
+                        {textTime}
+                    </Text>
+                    {!disabled && <TouchableOpacity
+                        style={timerStyles.startBtn}
+                        onPress={this.handleStartStop.bind(this)}>
+                    <Text style={timerStyles.startText}>{timerText}</Text>
+                    </TouchableOpacity>}
+                    {!disabled && <TouchableOpacity
+                        onPress={this.resetTimer.bind(this)}>
+                    <Text style={timerStyles.resetBtn}>Reset</Text>
+                    </TouchableOpacity>}
+                    <InstructionsList method={methods[method]} />
+                </View>
+            </ScrollView>
             );
     }
 }
