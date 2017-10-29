@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { timerStyles } from '~/styles';
 
-export default class InstructionsList extends Component {
+export default class IngredientsList extends Component {
     constructor(props) {
         super(props);
     }
