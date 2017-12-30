@@ -3,7 +3,6 @@ import {
     Text,
     View
 } from 'react-native';
-import ProgressBar from './progress_bar';
 
 import { headerStyles } from '~/styles';
 
@@ -14,7 +13,6 @@ export default class Header extends Component {
                 <Text style={headerStyles.title}>Brew Guides</Text>
                 <Text style={headerStyles.method}>Chemex</Text>
                 <Text style={headerStyles.details}>Serves 2 | 4 minutes</Text>
-                <ProgressBar {...this.props}/>
             </View>
             );
     }

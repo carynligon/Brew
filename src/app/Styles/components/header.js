@@ -4,7 +4,7 @@ export default {
     header: {
         alignSelf: 'stretch',
         backgroundColor: variables.primary,
-        marginTop: 10,
+        width: 375,
     },
     details: {
         color: variables.gray_20,

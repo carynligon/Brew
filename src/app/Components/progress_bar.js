@@ -12,13 +12,14 @@ export default class ProgressBar extends Component {
     state = {
         progressAnim: new Animated.Value(0),
         totalWidth: 375,
-        totalTime: methods[this.props.method].time,
+        totalTime: this.props.method.time,
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('next props', nextProps.timer.time)
         const { totalWidth, totalTime } = this.state;
-        const { time: nextTime } = nextProps;
-        if (nextTime === 0) {
+        const { timer: { time: nextTime } } = nextProps;
+        if (nextTime === 0 || nextTime !== this.props.timer.time) {
             Animated.timing(
                 this.state.progressAnim,
                 {

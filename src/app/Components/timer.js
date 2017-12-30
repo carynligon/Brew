@@ -116,7 +116,6 @@ export class Timer extends Component {
         }
         return (
             <View style={timerStyles.container}>
-                <Header time={totalSeconds} method={method} />
                 <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
                 <Text style={timerStyles.timerText}>
                     {textTime}

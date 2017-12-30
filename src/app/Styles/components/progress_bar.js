@@ -8,6 +8,6 @@ export default {
     container: {
         backgroundColor: variables.yellow_lt,
         height: 10,
-        width: 375
+        width: 375,
     }
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   AsyncStorage,
   Image,
+  StatusBar,
   Text,
   TouchableOpacity,
   View
@@ -38,6 +39,9 @@ export class Home extends React.Component {
   render() {
     return (
       <View style={homeStyles.container}>
+        <StatusBar
+          barStyle="light-content"
+        />
         <InstructionsSection {...this.props} />
       </View>
     );
