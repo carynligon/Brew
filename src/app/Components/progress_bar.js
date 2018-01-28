@@ -16,7 +16,6 @@ export default class ProgressBar extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('next props', nextProps.timer.time)
         const { totalWidth, totalTime } = this.state;
         const { timer: { time: nextTime } } = nextProps;
         if (nextTime === 0 || nextTime !== this.props.timer.time) {

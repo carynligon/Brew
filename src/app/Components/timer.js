@@ -23,7 +23,7 @@ export class Timer extends Component {
             timerTextMins: '00',
             timerTextSecs: '00',
             textTime: '00:00',
-            method: 'aeropress',
+            method: 'chemex',
             startTimer: false,
             finishedTimer: false,
         }

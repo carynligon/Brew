@@ -12,13 +12,15 @@ import { instructionsStyles } from '~/styles';
 
 
 import IngredientsList from '~/components/ingredients_list';
+import StepLongForm from '~/components/step_long';
 import { Timer } from '~/components/timer';
 
-const InstructionsSection = (props) => (
+const InstructionsSection = (props) => {
+  return (
   <View>
     <View style={instructionsStyles.headerContainer}>
-      <Header method={methods['aeropress']} />
-      <ProgressBar {...props} method={methods['aeropress']} />
+      <Header method={methods['chemex']} />
+      <ProgressBar {...props} method={methods['chemex']} />
     </View>
     <ScrollView contentContainerStyle={instructionsStyles.contentContainer}>
       <View>
@@ -26,12 +28,15 @@ const InstructionsSection = (props) => (
           style={{width: 400, height: 200}}
           source={require('../assets/chemex.png')}
         />
-        <IngredientsList method={methods['aeropress']} />
+        <IngredientsList method={methods['chemex']} />
         <Timer {...props} />
         <View>
-          <Text>Step 1</Text>
-          <Text>Step 2</Text>
-          <Text>Step 3</Text>
+          {methods['chemex'].nonTimedSteps.map((step, i) => (
+            <StepLongForm step={step} index={i + 1} key={`non-timed-step-${i}`} />
+          ))}
+          {methods['chemex'].timedSteps.map((step, i) => (
+            <StepLongForm step={step} index={i + methods['chemex'].nonTimedSteps.length + 1} key={`timed-step-${i}`} />
+          ))}
         </View>
         <View>
           <Text>Other Recipes</Text>
@@ -39,6 +44,7 @@ const InstructionsSection = (props) => (
       </View>
     </ScrollView>
   </View>
-)
+  );
+}
 
 export default InstructionsSection;
