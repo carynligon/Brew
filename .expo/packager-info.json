@@ -1,8 +1,8 @@
 {
-  "expoServerNgrokUrl": "https://fg-e8q.carynligon.brew.exp.direct",
-  "packagerNgrokUrl": "https://packager.fg-e8q.carynligon.brew.exp.direct",
-  "ngrokPid": 22358,
+  "expoServerNgrokUrl": "https://qc-tyw.carynligon.brew.exp.direct",
+  "packagerNgrokUrl": "https://packager.qc-tyw.carynligon.brew.exp.direct",
+  "ngrokPid": 53554,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 22347
+  "packagerPort": 19002,
+  "packagerPid": 53538
 }

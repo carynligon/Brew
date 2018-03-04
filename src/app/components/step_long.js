@@ -13,7 +13,7 @@ const StepLongForm = ({ step, index }) => {
   <View>
     <Image
       style={{width: 400, height: 200}}
-      source={require('../assets/chemex.png')}
+      source={{uri: step.img}}
     />
       <View style={stepLongStyles.textContainer}>
       <Text style={stepLongStyles.stepNumber}>Step {index}</Text>

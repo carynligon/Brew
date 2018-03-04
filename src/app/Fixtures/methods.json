@@ -9,13 +9,14 @@
             {
                 "order": 1,
                 "title": "Prep & Preheat",
-                "img": "",
+                "img": "http://i67.tinypic.com/14in3x0.png",
                 "directions": "Fill your kettle with filtered water and bring it up to right before a boil. While you wait, grab your chemex, coffee, scale, and filter",
                 "directions_long": "Fill your kettle with filtered water and bring it up to right before a boil. While you wait, grab your chemex, coffee, scale, and filter Fill your kettle with filtered water and bring it up to right before a boil. While you wait, grab your chemex, coffee, scale, and filter"
             },
             {
                 "order": 2,
                 "title": "Measure & Grind",
+                "img": "http://i64.tinypic.com/4llurq.png",
                 "directions": "Use a scale to weight out about 42 grams of coffee and grind to a similar size of kosher salt. (#21 on a Baratza Encore)",
                 "directions_long": "Use a scale to weight out about 42 grams of coffee and grind to a similar size of kosher salt. (#21 on a Baratza Encore) Use a scale to weight out about 42 grams of coffee and grind to a similar size of kosher salt. (#21 on a Baratza Encore)"
             }
@@ -25,18 +26,21 @@
                 "order": 1,
                 "time": { "start": 0, "stop": 10},
                 "title": "Saturate the grounds",
+                "img": "http://i67.tinypic.com/2hflvye.png",
                 "directions": "Pouring in concentric circles, saturate grounds with 80g of water",
                 "directions_long": "Pouring in concentric circles, saturate grounds with 80g of water Pouring in concentric circles, saturate grounds with 80g of water Pouring in concentric circles, saturate grounds with 80g of water"
             }, {
                 "order": 2,
                 "time": { "start": 10, "stop": 20},
                 "title": "Slow & Steady",
+                "img": "http://i64.tinypic.com/sop9vt.png",
                 "directions": "Continue, slowly pouring in concentric circles",
                 "directions_long": "Continue, slowly pouring in concentric circles Continue, slowly pouring in concentric circles Continue, slowly pouring in concentric circles"
             }, {
                 "order": 3,
                 "time": { "start": 20, "stop": 40},
                 "title": "Stop at 700g",
+                "img": "http://i64.tinypic.com/20r2o8x.png",
                 "directions": "Stop pouring once you get to 700g of water",
                 "directions_long": "Stop pouring once you get to 700g of water Stop pouring once you get to 700g of water Stop pouring once you get to 700g of water Stop pouring once you get to 700g of water"
             }
