@@ -23,7 +23,7 @@ export class Timer extends Component {
             timerTextMins: '00',
             timerTextSecs: '00',
             textTime: '00:00',
-            method: 'aeropress',
+            method: 'chemex',
             startTimer: false,
             finishedTimer: false,
         }
@@ -116,7 +116,6 @@ export class Timer extends Component {
         }
         return (
             <View style={timerStyles.container}>
-                <Header time={totalSeconds} method={method} />
                 <Instructions time={totalSeconds} resetTimer={this.resetTimer} instruction={instruction} method={method} startTimer={startTimer} stopTimer={this.stopTimer} finishedTimer={finishedTimer} />
                 <Text style={timerStyles.timerText}>
                     {textTime}
@@ -124,12 +123,15 @@ export class Timer extends Component {
                 {!disabled && <TouchableOpacity
                     style={timerStyles.startBtn}
                     onPress={this.handleStartStop.bind(this)}>
-                  <Text style={timerStyles.startText}>{timerText}</Text>
+                <Text style={timerStyles.startText}>{timerText}</Text>
                 </TouchableOpacity>}
                 {!disabled && <TouchableOpacity
                     onPress={this.resetTimer.bind(this)}>
-                  <Text style={timerStyles.resetBtn}>Reset</Text>
+                <Text style={timerStyles.resetBtn}>Reset</Text>
                 </TouchableOpacity>}
+                <Text>
+                    Scroll down for full instructions
+                </Text>
             </View>
             );
     }

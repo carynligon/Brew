@@ -1,11 +1,14 @@
 import variables from '~/styles/globals/variables';
 
 export default {
+    contentContainer: {
+        paddingVertical: 0,
+    },
     container: {
         alignItems: 'center',
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-around'
+        // flexDirection: 'column',
+        // justifyContent: 'space-around'
     },
     instructionsContainer: {
         alignSelf: 'stretch',
@@ -53,5 +56,13 @@ export default {
         color: variables.gray_20,
         fontSize: 76,
         marginBottom: 20,
+    },
+    instructionList: {
+        marginTop: 70,
+    },
+    instructionListHeader: {
+        color: variables.secondary,
+        fontSize: 18,
+        fontWeight: "600",
     }
 };
