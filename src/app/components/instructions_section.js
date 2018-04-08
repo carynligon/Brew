@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
-import {
-    Image,
-    ScrollView,
-    Text,
-    View
-} from 'react-native';
-import methods from '~/fixtures/methods';
-import ProgressBar from '~/components/progress_bar';
-import Header from '~/components/header';
-import { instructionsStyles } from '~/styles';
+import React, { Component } from "react";
+import { Image, ScrollView, Text, View } from "react-native";
+import methods from "~/fixtures/methods";
+import ProgressBar from "~/components/progress_bar";
+import Header from "~/components/header";
+import { instructionsStyles } from "~/styles";
+import { formatTimer } from '~/utils/timerUtils';
 
-
-import IngredientsList from '~/components/ingredients_list';
-import StepLongForm from '~/components/step_long';
-import Timer from '~/components/timer';
+import IngredientsList from "~/components/ingredients_list";
+import StepLongForm from "~/components/step_long";
+import Timer from "~/components/timer";
 
 class InstructionsSection extends Component {
   constructor(props) {
@@ -26,13 +21,13 @@ class InstructionsSection extends Component {
       minutes: 0,
       running: false,
       seconds: 0,
-      timerTextMins: '00',
-      timerTextSecs: '00',
-      textTime: '00:00',
+      timerTextMins: "00",
+      timerTextSecs: "00",
+      textTime: "00:00",
       totalSeconds: 0,
-      method: 'chemex',
+      method: "chemex",
       startTimer: false,
-      finishedTimer: false,
+      finishedTimer: false
     };
     this.timer;
     this.enableStart = this.enableStart.bind(this);
@@ -51,115 +46,141 @@ class InstructionsSection extends Component {
         this.setState({ offset: fy });
       }
     });
-    if (offset !== 0 && !this.state.timerHeader && (scrollOffset > offset - 50)) {
+    if (offset !== 0 && !this.state.timerHeader && scrollOffset > offset - 50) {
       this.setState({ timerHeader: true });
-    }
-    else if (this.state.timerHeader && scrollOffset < offset - 50) {
+    } else if (this.state.timerHeader && scrollOffset < offset - 50) {
       this.setState({ timerHeader: false });
     }
   }
   enableStart() {
-    this.setState({enableStart: true});
-}
-
-  nextStep() {
-      if (methods[this.state.method].nonTimedSteps.length - 1 === this.state.instruction) {
-          this.enableStart();
-      }
-      else {
-          this.setState({instruction: this.state.instruction + 1});
-      }
+    this.setState({ enableStart: true });
   }
 
-  updateSomething() {
-      const { method, totalSeconds: time } = this.state;
-      this.setState({totalSeconds: (this.state.minutes * 60 + this.state.seconds), running: true});
-      if (this.state.seconds < 59) {
-          this.setState({seconds: this.state.seconds + 1})
-          if (this.state.seconds <= 9 && this.state.minutes <= 9) {
-            this.setState({textTime: '0' + this.state.minutes + ':' + '0' + this.state.seconds})
-          } else if (this.state.seconds >= 10 && this.state.minutes <= 9) {
-            this.setState({textTime: '0' + this.state.minutes + ':' + this.state.seconds})
-          } else {
-            this.setState({textTime: this.state.minutes + ':' + this.state.seconds})
-          }
-          } else {
-            this.setState({minutes: this.state.minutes + 1, seconds: 0});
-            this.setState({textTime: '0' + this.state.minutes + ':00'});
-        }
-        this.props.startTimer(this.props.timer.time);
-      }
+  nextStep() {
+    if (
+      methods[this.state.method].nonTimedSteps.length - 1 ===
+      this.state.instruction
+    ) {
+      this.enableStart();
+    } else {
+      this.setState({ instruction: this.state.instruction + 1 });
+    }
+  }
+
+  updateTimeText() {
+    const { method, totalSeconds: time, minutes, seconds } = this.state;
+    const { newSeconds, newMinutes, textTime, totalSeconds, running} = formatTimer(method, time, minutes, seconds)
+    this.setState({
+      minutes, newMinutes,
+      running,
+      seconds: newSeconds,
+      textTime,
+      totalSeconds,
+    })
+    this.props.startTimer(this.props.timer.time);
+  }
 
   pauseTimer() {
-      clearTimeout(this.timer);
-      this.setState({running: false});
+    clearTimeout(this.timer);
+    this.setState({ running: false });
   }
 
   startTimer() {
-      this.setState({ startTimer: true }, () => {
-          this.timer = setInterval(this.updateSomething.bind(this), 1000);
-      });
+    this.setState({ startTimer: true }, () => {
+      this.timer = setInterval(this.updateTimeText.bind(this), 1000);
+    });
   }
 
   stopTimer() {
-      clearTimeout(this.timer);
-      this.setState({ 
-          finishedTimer: true, 
-          running: false, 
-          disabled: true });
+    clearTimeout(this.timer);
+    this.setState({
+      finishedTimer: true,
+      running: false,
+      disabled: true
+    });
   }
 
   handleStartStop() {
-      if (this.state.enableStart) {
-          if (this.state.running) {
-              this.pauseTimer();
-          }
-          else {
-              this.startTimer();
-          }
+    if (this.state.enableStart) {
+      if (this.state.running) {
+        this.pauseTimer();
+      } else {
+        this.startTimer();
       }
-      else {
-          this.nextStep();
-      }
+    } else {
+      this.nextStep();
+    }
   }
 
   resetTimer() {
-      clearTimeout(this.timer);
-      this.setState(this.initialState);
+    clearTimeout(this.timer);
+    this.setState(this.initialState);
   }
   render() {
-    const { enableStart, running, disabled, totalSeconds,
-      instruction, startTimer, resetTimer, method, stopTimer,
-      finishedTimer, textTime } = this.state;
-    const currentStep = !startTimer ? methods[method].nonTimedSteps[instruction] : methods[method].timedSteps[instruction];
-    let timerText = 'next';
+    const {
+      enableStart,
+      running,
+      disabled,
+      totalSeconds,
+      instruction,
+      startTimer,
+      resetTimer,
+      method,
+      stopTimer,
+      finishedTimer,
+      textTime
+    } = this.state;
+    const currentStep = !startTimer
+      ? methods[method].nonTimedSteps[instruction]
+      : methods[method].timedSteps[instruction];
+    let timerText = "next";
     if (enableStart) {
-        timerText = running ? 'pause' : 'start';
+      timerText = running ? "pause" : "start";
     }
     return (
       <View>
         <View style={instructionsStyles.headerContainer}>
-          <Header method={methods['chemex']} timer={this.state.timerHeader} timerText={textTime} currentStep={currentStep} /> 
-          <ProgressBar {...this.props} method={methods['chemex']} />
+          <Header
+            method={methods["chemex"]}
+            timer={this.state.timerHeader}
+            timerText={textTime}
+            currentStep={currentStep}
+          />
+          <ProgressBar {...this.props} method={methods["chemex"]} />
         </View>
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={instructionsStyles.contentContainer}
-          onScroll={(event) => this.onScroll(event)}
+          onScroll={event => this.onScroll(event)}
           scrollEventThrottle={60}
         >
           <View>
             <Image
-              style={{width: 400, height: 200}}
-              source={require('../assets/chemex.png')}
+              style={{ width: 400, height: 200 }}
+              source={require("../assets/chemex.png")}
             />
-            <IngredientsList method={methods['chemex']} />
-            <Timer {...this.state} handleStartStop={this.handleStartStop} resetTimer={this.resetTimer} startTimer={this.startTimer} timerText={timerText} stopTimer={this.stopTimer} />
-            <View ref={(start) => this.start = start}>
-              {methods['chemex'].nonTimedSteps.map((step, i) => (
-                <StepLongForm step={step} index={i + 1} key={`non-timed-step-${i}`} />
+            <IngredientsList method={methods["chemex"]} />
+            <Timer
+              {...this.state}
+              handleStartStop={this.handleStartStop}
+              resetTimer={this.resetTimer}
+              startTimer={this.startTimer}
+              timerText={timerText}
+              stopTimer={this.stopTimer}
+            />
+            <View ref={start => (this.start = start)}>
+              {methods["chemex"].nonTimedSteps.map((step, i) => (
+                <StepLongForm
+                  step={step}
+                  index={i + 1}
+                  key={`non-timed-step-${i}`}
+                />
               ))}
-              {methods['chemex'].timedSteps.map((step, i) => (
-                <StepLongForm step={step} index={i + methods['chemex'].nonTimedSteps.length + 1} key={`timed-step-${i}`} />
+              {methods["chemex"].timedSteps.map((step, i) => (
+                <StepLongForm
+                  step={step}
+                  index={i + methods["chemex"].nonTimedSteps.length + 1}
+                  key={`timed-step-${i}`}
+                />
               ))}
             </View>
             <View>
@@ -167,7 +188,8 @@ class InstructionsSection extends Component {
             </View>
           </View>
         </ScrollView>
-      </View>);
+      </View>
+    );
   }
 }
 
