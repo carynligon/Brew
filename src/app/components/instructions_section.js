@@ -54,6 +54,9 @@ class InstructionsSection extends Component {
     if (offset !== 0 && !this.state.timerHeader && (scrollOffset > offset - 50)) {
       this.setState({ timerHeader: true });
     }
+    else if (this.state.timerHeader && scrollOffset < offset - 50) {
+      this.setState({ timerHeader: false });
+    }
   }
   enableStart() {
     this.setState({enableStart: true});
@@ -107,7 +110,6 @@ class InstructionsSection extends Component {
   }
 
   handleStartStop() {
-    console.log('startstop')
       if (this.state.enableStart) {
           if (this.state.running) {
               this.pauseTimer();
@@ -129,6 +131,7 @@ class InstructionsSection extends Component {
     const { enableStart, running, disabled, totalSeconds,
       instruction, startTimer, resetTimer, method, stopTimer,
       finishedTimer, textTime } = this.state;
+    const currentStep = !startTimer ? methods[method].nonTimedSteps[instruction] : methods[method].timedSteps[instruction];
     let timerText = 'next';
     if (enableStart) {
         timerText = running ? 'pause' : 'start';
@@ -136,7 +139,7 @@ class InstructionsSection extends Component {
     return (
       <View>
         <View style={instructionsStyles.headerContainer}>
-          <Header method={methods['chemex']} timer={this.state.timerHeader} timerText={this.timerText} /> 
+          <Header method={methods['chemex']} timer={this.state.timerHeader} timerText={textTime} currentStep={currentStep} /> 
           <ProgressBar {...this.props} method={methods['chemex']} />
         </View>
         <ScrollView 
@@ -150,7 +153,7 @@ class InstructionsSection extends Component {
               source={require('../assets/chemex.png')}
             />
             <IngredientsList method={methods['chemex']} />
-            <Timer {...this.state} handleStartStop={this.handleStartStop} resetTimer={this.resetTimer} startTimer={this.startTimer} timerText={timerText} />
+            <Timer {...this.state} handleStartStop={this.handleStartStop} resetTimer={this.resetTimer} startTimer={this.startTimer} timerText={timerText} stopTimer={this.stopTimer} />
             <View ref={(start) => this.start = start}>
               {methods['chemex'].nonTimedSteps.map((step, i) => (
                 <StepLongForm step={step} index={i + 1} key={`non-timed-step-${i}`} />

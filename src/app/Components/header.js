@@ -8,8 +8,7 @@ import { headerStyles } from '~/styles';
 
 export default class Header extends Component {
     render() {
-        const { currentStep, method, nextStep, timer: showTimer, timerText } = this.props;
-        console.log(currentStep, 'current')
+        const { currentStep = {}, method, nextStep, timer: showTimer, timerText } = this.props;
         return (
             <View style={headerStyles.header}>
                 <Text style={headerStyles.title}>{showTimer ? currentStep.title : 'Brew Guides'}</Text>
