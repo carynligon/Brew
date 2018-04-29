@@ -3,7 +3,7 @@
   "description": "An empty new project",
   "slug": "Brew",
   "privacy": "public",
-  "sdkVersion": "24.0.0",
+  "sdkVersion": "26.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",
