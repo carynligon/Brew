@@ -138,7 +138,7 @@ class InstructionsSection extends Component {
       timerText = running ? "pause" : "start";
     }
     return (
-      <View>
+      <View style={instructionsStyles.main}>
         <View style={instructionsStyles.headerContainer}>
           <Header
             method={methods["chemex"]}

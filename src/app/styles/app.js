@@ -35,6 +35,6 @@ export default {
   },
   viewStyles: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   }
 };

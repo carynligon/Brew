@@ -4,6 +4,13 @@ export default {
     header: {
         alignSelf: 'stretch',
         backgroundColor: variables.primary,
+        height: 175,
+        width: 375,
+    },
+    headerCollapsed: {
+        alignSelf: 'stretch',
+        backgroundColor: variables.primary,
+        height: 125,
         width: 375,
     },
     details: {

@@ -8,6 +8,9 @@ export default {
       alignItems: 'center',
       flex: 1,
   },
+  main: {
+      backgroundColor: '#fff',
+  },
   headerContainer: {
       height: 10,
       position: 'absolute',

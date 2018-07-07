@@ -17,7 +17,11 @@ export default class IngredientsList extends Component {
             <View style={timerStyles.instructionList}>
                 <Text style={timerStyles.instructionListHeader}>What You'll Need:</Text>
                 { method.ingredients.map((ingredient, i) => (
-                    <View key={`ingredient-${i}`}><Text>{ingredient}</Text></View>
+                    <View key={`ingredient-${i}`}>
+                        <Text style={timerStyles.ingredientText}>
+                            {ingredient}
+                        </Text>
+                    </View>
                 ))}
             </View>
         );

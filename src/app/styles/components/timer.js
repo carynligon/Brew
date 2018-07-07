@@ -22,7 +22,7 @@ export default {
         textAlign: 'left',
     },
     instructionsTitle: {
-        fontSize: 30,
+        fontSize: 36,
         marginBottom: 10,
         textAlign: 'left'
     },
@@ -58,11 +58,18 @@ export default {
         marginBottom: 20,
     },
     instructionList: {
-        marginTop: 70,
+        backgroundColor: '#FAFAFA',
+        paddingTop: 30,
+        paddingBottom: 30,
+        paddingLeft: 30,
+    },
+    ingredientText: {
+        fontSize: 18,
+        fontWeight: '400',
     },
     instructionListHeader: {
-        color: variables.secondary,
-        fontSize: 18,
-        fontWeight: "600",
+        color: variables.black,
+        fontSize: 36,
+        fontWeight: '400',
     }
 };
